@@ -1,0 +1,67 @@
+[16-Nov-2015 12:00:07 Asia/Jakarta] PHP Notice:  Undefined index: fm_token in /home/joscelyn/public_html/assets/admin/filemanager/config/config.php on line 22
+[16-Nov-2015 12:00:12 Asia/Jakarta] PHP Notice:  Undefined index: fm_token in /home/joscelyn/public_html/assets/admin/filemanager/config/config.php on line 22
+[16-Nov-2015 12:00:24 Asia/Jakarta] PHP Notice:  Undefined index: fm_token in /home/joscelyn/public_html/assets/admin/filemanager/config/config.php on line 22
+[16-Nov-2015 12:02:55 Asia/Jakarta] PHP Notice:  Undefined index: path_thumb in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 14
+[16-Nov-2015 12:02:55 Asia/Jakarta] PHP Notice:  Undefined index: path_thumb in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 17
+[16-Nov-2015 12:02:55 Asia/Jakarta] PHP Warning:  strpos(): Offset not contained in string in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 17
+[16-Nov-2015 12:02:55 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 18
+[16-Nov-2015 12:02:55 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 19
+[16-Nov-2015 12:02:55 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 20
+[16-Nov-2015 12:02:55 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 38
+[16-Nov-2015 12:02:56 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 56
+[16-Nov-2015 12:02:56 Asia/Jakarta] PHP Notice:  Undefined index: path_thumb in /home/joscelyn/public_html/assets/admin/filemanager/execute.php on line 57
+[16-Nov-2015 12:03:13 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/force_download.php on line 19
+[16-Nov-2015 12:03:13 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/force_download.php on line 20
+[16-Nov-2015 12:03:13 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/force_download.php on line 21
+[16-Nov-2015 12:03:13 Asia/Jakarta] PHP Notice:  Undefined index: name in /home/joscelyn/public_html/assets/admin/filemanager/force_download.php on line 29
+[16-Nov-2015 12:03:13 Asia/Jakarta] PHP Notice:  Undefined index: path in /home/joscelyn/public_html/assets/admin/filemanager/force_download.php on line 35
+[16-Nov-2015 12:03:13 Asia/Jakarta] PHP Notice:  Undefined index: name in /home/joscelyn/public_html/assets/admin/filemanager/force_download.php on line 36
+[16-Nov-2015 12:03:13 Asia/Jakarta] PHP Notice:  Undefined index: extension in /home/joscelyn/public_html/assets/admin/filemanager/force_download.php on line 40
+[16-Nov-2015 12:17:09 Asia/Jakarta] PHP Notice:  Undefined index: user_token in /home/joscelyn/public_html/assets/admin/filemanager/config/config.php on line 146
+[16-Nov-2015 12:18:19 Asia/Jakarta] PHP Notice:  Undefined index: user_token in /home/joscelyn/public_html/assets/admin/filemanager/config/config.php on line 147
+[16-Nov-2015 12:19:25 Asia/Jakarta] PHP Notice:  Undefined index: user_token in /home/joscelyn/public_html/assets/admin/filemanager/config/config.php on line 147
+[16-Nov-2015 12:19:32 Asia/Jakarta] PHP Notice:  Undefined index: user_token in /home/joscelyn/public_html/assets/admin/filemanager/config/config.php on line 147
+[14-Apr-2016 06:19:22 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[14-Apr-2016 06:19:27 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[14-Apr-2016 06:19:35 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[14-Apr-2016 06:19:41 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[14-Apr-2016 06:19:45 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[14-Apr-2016 06:20:01 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[19-Jan-2018 23:38:25 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[19-Jan-2018 23:40:22 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[19-Jan-2018 23:41:37 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[19-Jan-2018 23:44:41 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[19-Jan-2018 23:45:14 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[20-Jan-2018 00:51:42 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[20-Jan-2018 02:07:15 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[20-Jan-2018 02:07:15 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[20-Jan-2018 02:34:49 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[24-Jan-2018 21:38:13 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 08:21:29 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 08:23:17 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 08:26:55 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 09:10:02 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 09:12:33 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 09:16:08 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 11:39:00 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 18:15:48 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 18:17:09 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[26-Jan-2018 18:17:23 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[26-Jan-2018 18:19:50 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 18:32:13 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 18:39:00 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 18:46:22 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 19:31:03 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 19:53:41 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[26-Jan-2018 19:58:50 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[28-Jan-2018 08:33:31 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[28-Jan-2018 08:33:36 Asia/Jakarta] PHP Fatal error:  Call to undefined function foldersize() in /home/joscelyn/public_html/assets/admin/filemanager/ajax_calls.php on line 329
+[28-Jan-2018 14:27:36 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[28-Jan-2018 14:31:53 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[28-Jan-2018 14:36:04 Asia/Jakarta] PHP Warning:  chmod(): No such file or directory in /home/joscelyn/public_html/assets/admin/filemanager/upload.php on line 87
+[31-Oct-2018 09:04:20 Asia/Jakarta] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/appshow/public_html/fatih/htdocs/joscelynopal/assets/admin/filemanager/config/config.php on line 21
+[31-Oct-2018 09:04:20 Asia/Jakarta] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/appshow/public_html/fatih/htdocs/joscelynopal/assets/admin/filemanager/config/config.php on line 21
+[02-Dec-2018 12:30:08 Asia/Jakarta] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/appshow/public_html/fatih/htdocs/joscelynopal/assets/admin/filemanager/config/config.php on line 21
+[02-Dec-2018 12:30:08 Asia/Jakarta] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/appshow/public_html/fatih/htdocs/joscelynopal/assets/admin/filemanager/config/config.php on line 21
+[20-Apr-2019 08:48:25 Asia/Jakarta] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/appshow/public_html/rizal/joscelynopal/assets/admin/filemanager/config/config.php on line 21
+[20-Apr-2019 08:48:25 Asia/Jakarta] PHP Warning:  mysql_connect(): Access denied for user 'root'@'localhost' (using password: NO) in /home/appshow/public_html/rizal/joscelynopal/assets/admin/filemanager/config/config.php on line 21
