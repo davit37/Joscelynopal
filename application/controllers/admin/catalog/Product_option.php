@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * ? DB INFO
  * 
  * Table = p_option
- * Column = option_name => varchar | json_child => text(JSON) 
+ * Column = option_name => varchar | json_child => text(JSON) | child_setting = text
  */
 
 class Product_option extends CI_Controller {
@@ -158,13 +158,15 @@ class Product_option extends CI_Controller {
 
   public function save(){
 
-    $option_name = $this->input->post('option_name');
-    $json_child  = $this->input->post('json_child');
-    $action      = $this->input->get('action');
+    $option_name    = $this->input->post('option_name');
+    $json_child     = $this->input->post('json_child');
+    $child_setting  = $this->input->post('child_setting');
+    $action         = $this->input->get('action');
 
     $data = array(
         'option_name'   => $option_name,
         'json_child '   => $json_child,
+        'child_setting' => $child_setting,
     );
 
     if($action =='Edit'){

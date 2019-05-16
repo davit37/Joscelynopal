@@ -211,13 +211,14 @@ $(document).on('change', child_list, function(){
    var _this_index   = _this.data('option-index');
    var get_input     = _this.parents().find(`.option-name[data-option-index='${_this_index}']`); //get DOM option name 
 
+   console.log($(this).val())
    if(_this.val() != 'none'){
       
       get_input.attr('data-parent-id', _this.val())
 
       //hide option in list
       $.each($(child_list), function(i,v){
-         $(child_list).eq(i).find(`[data-option-index='${_this_index}']`).css('display','none')
+         $(child_list).eq(i).find(`[option-index='${_this_index}']`).css('display','none')
       })
 
    }else{
@@ -294,6 +295,7 @@ $(btn_save).click(function(){
    form_data.append('option_name',$('#option_name').val());
    form_data.append('json_child',JSON.stringify(json_child));
    form_data.append('id',$('#id_option').val())
+   form_data.append('child_setting',$('#child_setting').val());
 
    $.ajax({
 

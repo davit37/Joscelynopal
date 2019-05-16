@@ -35,7 +35,6 @@
 
                                     <input type="text" name="option_name" placeholder="Option Name" id="option_name" class="form-control" value="<?php echo isset($result) ?$result[0]['option_name']:''  ?>" />
 
-
                                     <?php if($this->session->userdata('product_error')) {
                                         echo '<div class="text-danger">Product Name is required!</div>';
                                         $this->session->unset_userdata('product_error');
@@ -89,15 +88,23 @@
                                                             <table  class="table table-striped table-bordered table-hover">
                                                             
                                                                 <tbody id='tbl-value-<?php echo  $index ?>'>
+
                                                                 <?php foreach($json_child['option_value'] as $v_index => $option_value){ ?>
+
                                                                     <tr class='parent_rm'>
                                                                         <td>
+
                                                                             <input type="text" class="form-control option_value" value="<?php echo $option_value ?> " name="" data-option-index="<?php echo $index ?>" data-value-index="<?php echo $v_index?>">
+
                                                                         </td>
-                                                                        <td><button type="button" data-toggle="tooltip" title="Devare" class="btn btn-danger btn-del-val" data-option-index="<?php echo $index ?>" data-value-index="<?php echo $v_index?>"><i class="fa fa-trash"></i></button></td>
+                                                                        <td>
+                                                                              <button type="button" data-toggle="tooltip" title="Devare" class="btn btn-danger btn-del-val" data-option-index="<?php echo $index ?>" data-value-index="<?php echo $v_index?>"><i class="fa fa-trash"></i></button>
+
+                                                                        </td>
                                                                     </tr>
                                                                 <?php } ?>
                                                                 </tbody>
+
                                                                 <tfoot>
                                                                     <tr>
                                                                         <td colspan="1"></td>
@@ -197,13 +204,12 @@
 
                             <div class="form-group required ">
 
-                                <label for="input-text" class="col-sm-2 control-label">Text</label>
+                                <label for="input-text" class="col-sm-2 control-label">Child Settings</label>
 
                                 <div class="col-sm-10">
 
-                                    <textarea class="form-control" id="input-text" placeholder="Text" rows="4" cols="60"
-                                        name="text"></textarea>
-
+                                    <textarea class="form-control" rows="6" cols="60"
+                                        id="child_setting" > <?php echo isset($result) ? $result[0]['child_setting']:''  ?></textarea>
 
                                 </div>
 

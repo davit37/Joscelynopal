@@ -128,71 +128,7 @@
                     <div class="text2 text-group-desc-product text-group-desc-product">: <span class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>">$</span><span id="prices" data-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>" value="<?php echo number_format($product[0]['price'], 2, '.', '') ?>"><?php echo number_format($product[0]['price'], 2, '.', '') ?></span></div>
                 </div>
 
-                <?php
-
-                if ($product_options) {
-                    echo '<form>';
-                    foreach ($product_options as $product_option) {
-                        ?>
-                        <div class="text-group product-option">
-                            <div class="text1 text-group-desc-product"><?php echo $product_option['value'] ?> <?php echo ($product_option['required'] == 1) ? '<span class="required">*</span>' : ''; ?></div>
-                            <div class="text2 text-group-desc-product"><?php
-                                foreach ($option as $opt) {
-                                    if ($opt['option_id'] == $product_option['option_id']) {
-                                        $type = $opt['type'];
-                                            //break;
-                                    }
-                                }
-
-                                if ($type == 'select') {
-                                    echo '<select class="select_option option-available form-control" name="option[' . $product_option['product_option_id'] . ']">';
-                                    echo '<option data-price="0" value="">- Select -</option>';
-                                    foreach ($product_option_values as $product_option_value) {
-                                        if ($product_option['product_option_id'] == $product_option_value['product_option_id']) {
-                                            if ($product_option_value['price'] > 0) {
-                                                $opt_price = ' ( ' . $product_option_value['price_prefix'] . '$' . number_format($product_option_value['price'], 2, '.', '') . ' )';
-                                            } else {
-                                                $opt_price = '';
-                                            }
-                                            echo '<option data-price="'.number_format($product_option_value['price'], 2, '.', '').'" value="' . $product_option_value['product_option_value_id'] . '">' . $product_option_value['value'] . $opt_price . '</option>';
-                                        }
-                                    }
-                                    echo '</select>';
-                                }
-
-                                if ($type == 'radio') {
-                                    foreach ($product_option_values as $product_option_value) {
-                                        if ($product_option['product_option_id'] == $product_option_value['product_option_id']) {
-                                            if ($product_option_value['price'] > 0) {
-                                                $opt_price = ' ( ' . $product_option_value['price_prefix'] . '$' . number_format($product_option_value['price'], 2, '.', '') . ' )';
-                                            } else {
-                                                $opt_price = '';
-                                            }
-                                            echo '<input type="radio" data-price="'.number_format($product_option_value['price'], 2, '.', '').'" class="radio_option option-available" name="option[' . $product_option_value['product_option_id'] . ']" value="' . $product_option_value['product_option_value_id']  . '"> ' . $product_option_value['value'] . $opt_price . '<br>';
-                                        }
-                                    }
-                                }
-
-                                if ($type == 'checkbox') {
-                                    foreach ($product_option_values as $product_option_value) {
-                                        if ($product_option['product_option_id'] == $product_option_value['product_option_id']) {
-                                            if ($product_option_value['price'] > 0) {
-                                                $opt_price = ' ( ' . $product_option_value['price_prefix'] . '$' . number_format($product_option_value['price'], 2, '.', '') . ' )';
-                                            } else {
-                                                $opt_price = '';
-                                            }
-                                            echo '<input type="checkbox" data-price="'.number_format($product_option_value['price'], 2, '.', '').'" class="checkbox_option option-available" name="option[' . $product_option_value['product_option_id'] . ']" value="' . $product_option_value['product_option_value_id']  . '"> ' . $product_option_value['value'] . $opt_price . '<br>';
-                                        }
-                                    }
-                                }
-                                ?>
-                            </div>
-                        </div>
-                        <?php
-                    }
-                    echo '</form>';
-                }
-                ?>
+              
 
                 <?php if ($product_special) { ?>
                 <div class="text-group">

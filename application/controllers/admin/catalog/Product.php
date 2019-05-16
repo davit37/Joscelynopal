@@ -289,7 +289,7 @@ class Product extends CI_Controller {
         //Option
 
         $data['option'] = $this->Model_crud->select('option');
-
+        
 
 
         $data['load_view'] = 'admin/catalog/product/product_add';
@@ -640,6 +640,9 @@ class Product extends CI_Controller {
 
     public function edit($seg1 = '') {
 
+
+
+
         //Data
 
         $data = $this->data;
@@ -647,6 +650,16 @@ class Product extends CI_Controller {
         
 
         $product_id = $seg1;
+
+        $p_option = $this->Model_crud->select('p_option');
+        $html = '';
+
+        foreach($p_option as  $value){
+
+            $html .= '<option value="'.$value['id'].'">'.$value['option_name'].'</option>';
+        }
+
+        $data['option_list'] = $html;
 
         $data['result'] = $this->Model_crud->select_where('product', array("product_id" => $product_id));
 
@@ -712,6 +725,7 @@ class Product extends CI_Controller {
 
 
 
+
         $product_id = $this->input->post('product_id');
 
         $name = $this->input->post('product_name');
@@ -773,6 +787,7 @@ class Product extends CI_Controller {
         $opt_price = $this->input->post('opt_price');
 
         $opt_weight = $this->input->post('opt_weight');
+        $option_id  = $this->input->post('option_id');
 
 
 
@@ -890,7 +905,9 @@ class Product extends CI_Controller {
 
             "slug" => $slug,
 
-            "date_modified" => date("c")
+            "date_modified" => date("c"),
+
+            'option_id' => $option_id
 
             );
 

@@ -11,27 +11,27 @@ date_default_timezone_set('Asia/Jakarta');
 */
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'jossiepal_live');
+define('DB_NAME', 'joscelynopal');
 
 // CHECKING TOKEN LOGIN IN DB
 $akey = (isset($_GET['akey'])) ? $_GET['akey'] : '';
 if($akey != ''){
     unset($_SESSION['user_token']);
     
-    $link = mysql_connect('localhost', DB_USER, DB_PASS);
+    $link = mysqli_connect('localhost', DB_USER, DB_PASS);
     if (!$link) {
         die('Could not connect');
     }
-    if (!mysql_select_db(DB_NAME)) {
+    if (!mysqli_select_db($link ,DB_NAME)) {
         die('Could not select database');
     }
     
-    $result = mysql_query('SELECT `token` FROM `users` WHERE `token` = "'.$_GET['akey'].'"');
+    $result = mysqli_query($link ,'SELECT `token` FROM `users` WHERE `token` = "'.$_GET['akey'].'"');
     
     if (!$result) {
         die('Could not query');
     }
-    $row = mysql_fetch_row($result);
+    $row = mysqli_fetch_row($result);
     
     if($row) {
     	$_SESSION['user_token'] = $row[0];
@@ -39,7 +39,7 @@ if($akey != ''){
     	die('Access Denied!');
     }
     
-    mysql_close($link);
+    mysqli_close($link);
 }
 
 if(!isset($_SESSION['user_token'])) {

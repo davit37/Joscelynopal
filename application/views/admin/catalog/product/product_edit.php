@@ -60,7 +60,7 @@
 
                             <li><a href="#tab-video" data-toggle="tab">Video</a></li>
 
-                            <li><a href="#tab-option" data-toggle="tab">Option</a></li>
+                            <!-- <li><a href="#tab-option" data-toggle="tab">Option</a></li> -->
 
                             <li><a href="#tab-special" data-toggle="tab">Special</a></li>
 
@@ -311,6 +311,24 @@
                                             <option value="1" <?php echo ($result[0]['featured'] == 1) ? 'selected="selected"' : ''; ?>>Yes</option>
 
                                             <option value="0" <?php echo ($result[0]['featured'] == 0) ? 'selected="selected"' : ''; ?>>No</option>
+
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label class="col-sm-2 control-label" for="input-featured">Option</label>
+
+                                    <div class="col-sm-10">
+
+                                        <select name="option_id" id="input-featured" class="form-control">
+
+                                            <?php 
+                                               echo $option_list;
+                                            ?>
 
                                         </select>
 
@@ -612,7 +630,7 @@
 
 
 
-                            <div class="tab-pane" id="tab-option">
+                            <!-- <div class="tab-pane" id="tab-option">
 
                                 <div class="table-responsive">
 
@@ -855,7 +873,7 @@
 
                                 </div>
 
-                            </div>
+                            </div> -->
 
 
 
