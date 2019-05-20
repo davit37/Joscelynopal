@@ -7,7 +7,7 @@
             <?php if(!empty($product)){ ?>
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 product-detail-column">
                 <!-- <div class="scroll"> -->
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-img-wrap">
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-7 col-img-wrap">
                         <div id="slideshow-1">
                             <div id="cycle-1" class="cycle-slideshow"
                             data-cycle-slides="> div"
@@ -86,7 +86,7 @@
                 <?php } ?>
             </div>
             
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-detail-wrap">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5 col-detail-wrap">
                 <div class="text-group">
                     <div class="text1 text-group-desc-product">Type</div>
                     <div class="text2 text-group-desc-product text-group-desc-product">: <?php echo $product[0]['type'] ?></div>
@@ -127,8 +127,43 @@
                     <div class="text1 text-group-desc-product">Price</div>
                     <div class="text2 text-group-desc-product text-group-desc-product">: <span class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>">$</span><span id="prices" data-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>" value="<?php echo number_format($product[0]['price'], 2, '.', '') ?>"><?php echo number_format($product[0]['price'], 2, '.', '') ?></span></div>
                 </div>
-
+       
+            
               
+                
+
+                   <?php if($product_option != null){ foreach(json_decode($product_option[0]['json_child'],true) as $child_list){?>
+                    <div class="text-group product-option">
+
+                        <div class="text1 text-group-desc-product" style="height: 44px;">
+                            <?php echo $child_list['child_name']?> <span class="required">*</span>
+                        </div>
+
+                            <div class="text2 text-group-desc-product" style="height: 44px;">
+
+                                <select class="select_option option-available form-control option_list "
+
+                                data-name='<?php echo str_replace(' ','_',strtolower($child_list['child_name'] ))  ?>'
+                                
+                                data-parent="<?php echo !empty($child_list['option_child_of']) ? str_replace(' ','_',strtolower($child_list['option_child_of'] )) : '' ?>" >
+
+                                    <option data-price="0" value="">- Select -</option>
+                            
+                                    <?php foreach($child_list['option_value'] as $index => $value){?>
+                                    
+                                        <option  value="<?php echo $index ?>"> <?php echo $value ?></option>
+
+                                    <?php }?>
+
+                                </select>      
+                            </div>
+                         
+                        </div>
+
+                  <?php }}?>
+
+               
+          
 
                 <?php if ($product_special) { ?>
                 <div class="text-group">
@@ -508,3 +543,9 @@
             });
     });
     //--></script>
+
+    <script>
+        var json_option =<?php echo  $product_option[0]['json_child'] ?>
+    
+    </script>
+    <script src="<?php echo base_url('assets/js/single_product.js'); ?>"></script>

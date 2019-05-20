@@ -694,7 +694,7 @@ a {
 
 .featured-title {
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
     margin: 0 0 20px;
 
@@ -770,9 +770,9 @@ a {
 
     margin-bottom: 40px;
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
-    font-size: 18px;
+    font-size: 14px;
 
 }
 
@@ -877,7 +877,7 @@ a {
 
 #menu-sort li.active a {
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
     font-size: 18px;
 
@@ -892,7 +892,7 @@ a {
 
     margin-right: 20px;
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
     font-size: 18px;
 
@@ -949,7 +949,7 @@ a {
 
     color: #FF0000;
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
 }
 
@@ -969,7 +969,7 @@ a {
 
     height: 20px;
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
     font-size: 18px;
 
@@ -996,7 +996,7 @@ a {
 
 .offer a {
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
     font-size: 18px;
 
@@ -1088,17 +1088,14 @@ a {
 
 .text1 {
 
-    width: 65px;
+    width: 96px;
 
     display: inline-block;
 
-    font-family: 'BebasNeue Light';
+    font-family: 'Gotham';
 
-    font-size: 16px;
+    font-size: 13px;
 
-    font-weight: 600;
-
-    letter-spacing: 1px;
 }
 
 .text2 {
@@ -1107,21 +1104,19 @@ a {
 
     display: inline-block;
 
-    font-family: 'BebasNeue Light';
+    font-family: 'Gotham';
 
-    font-size: 16px;
+    font-size: 13px;
 
-    font-weight: 600;
 
-    letter-spacing: 1px;
 
 }
 
 .text2 span {
 
-    font-family: 'BebasNeue Book';
+    font-family: 'Gotham';
 
-    font-size: 32px;
+    font-size: 15px;
 
     color: red;
 
@@ -1205,9 +1200,9 @@ a {
 
 .col-recommended .title {
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham book';
 
-    font-size: 25px;
+    font-size: 20px;
 
     color: #999999;
 
@@ -1217,25 +1212,26 @@ a {
 
 .col-recommended .name {
 
-    font-family: 'BebasNeue Book';
+    font-family: 'Gotham book';
 
-    font-size: 18px;
+    font-size: 15px;
 
 }
 
 .col-recommended .desc {
 
-    font-family: 'BebasNeue Book';
+    font-family: 'Gotham';
 
-    font-size: 18px;
+    font-size: 15px;
 
 }
 
 .col-recommended .price {
 
-    font-family: 'BebasNeue Book';
+    font-family: 'Gotham Narrow';
 
-    font-size: 18px;
+    font-size: 15px;
+    font-weight: 700;
 
 }
 
@@ -1253,9 +1249,9 @@ a {
 
 .product-detail-desc-wrap .title {
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham book';
 
-    font-size: 25px;
+    font-size: 20px;
 
     color: #999999;
 
@@ -1268,16 +1264,16 @@ a {
 
 .product-detail-desc-wrap .desc {
 
-    font-family: 'BebasNeue Regular';
-
-    font-size: 18px;
-
-    letter-spacing: .7px;
+    font-family: Gotham Book;
+    font-size: 14px;
+    
+   
 
 }
 
 .product-detail-desc-wrap .desc p{ 
     margin-bottom: 5px;
+    line-height: 1.7;
 }
 
 .review-wrap {
@@ -1288,7 +1284,7 @@ a {
 
 .review-wrap .title {
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
     font-size: 22px;
 
@@ -1304,7 +1300,7 @@ a {
 
 .review-wrap .title2 {
 
-    font-family: 'BebasNeue Regular';
+    font-family: 'Gotham';
 
     font-size: 25px;
 
@@ -1316,11 +1312,9 @@ a {
 
 .review-wrap .review-title, .review-wrap .review-body, .review-wrap .review-date {
 
-    font-family: 'BebasNeue Light';
+    font-family: 'Gotham Book';
 
     font-size: 18px;
-
-    font-weight: 600;
 
     letter-spacing: .7px;
 
@@ -1363,9 +1357,9 @@ a {
 
 .socmed-wrap .subscribe-wrap input {
 
-    font-family: 'BebasNeue Light';
+    font-family: 'gotham book';
 
-    font-size: 16px;
+    font-size: 14px;
 
 }
 
@@ -2146,8 +2140,6 @@ h4.textshoppingcart{
 }
 
 .select_option{
-    font-weight: 600;
-    letter-spacing: 1px;
     padding: 6px 6px;
     height: 30px;
 }
