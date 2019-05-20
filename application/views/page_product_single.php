@@ -125,7 +125,7 @@
                 </div>
                 <div class="text-group">
                     <div class="text1 text-group-desc-product">Price</div>
-                    <div class="text2 text-group-desc-product text-group-desc-product">: <span class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>">$</span><span id="prices" data-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>" value="<?php echo number_format($product[0]['price'], 2, '.', '') ?>"><?php echo number_format($product[0]['price'], 2, '.', '') ?></span></div>
+                    <div class="text2 text-group-desc-product text-group-desc-product">: <span class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>">$</span><span id="prices" data-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" data-original-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>" value="<?php echo number_format($product[0]['price'], 2, '.', '') ?>"><?php echo number_format($product[0]['price'], 2, '.', '') ?></span></div>
                 </div>
        
             
@@ -545,7 +545,8 @@
     //--></script>
 
     <script>
-        var json_option =<?php echo  $product_option[0]['json_child'] ?>
+        var json_option =<?php echo  $product_option[0]['json_child'] ?>;
+        var child_settings = `<?php echo  $product_option[0]['child_setting'] ?>`
     
     </script>
     <script src="<?php echo base_url('assets/js/single_product.js'); ?>"></script>
