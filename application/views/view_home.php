@@ -1,3 +1,4 @@
+
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 no-padding-xs">
     <div class="row">
         <div id="home-slider" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -33,9 +34,13 @@
                         <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 list-product-home">
                             <div class="item-img-wrap">
                                 <div class="item-img" style="background-image: url(<?php echo base_url('upload/' . $product['image']); ?>);"></div>
+                               
+
                                 <div class="item-cart"><a onclick="cart.add('<?php echo $product['product_id'] ?>');">Add to cart</a></div>
+                    
+                                
                                 <div class="item-title text-center"><a href="<?php echo base_url('product/'.$product['slug']) ?>"><?php echo character_limiter($product['name'], 22) ?></a></div>
-                            </div>
+                        </div>
                         </div>
                         <?php
                     }

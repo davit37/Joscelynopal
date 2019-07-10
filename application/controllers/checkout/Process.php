@@ -165,7 +165,7 @@ class Process extends CI_Controller {
             $quantity = array();
             foreach ($json as $row) {
 
-                $query = "SELECT p.*,pso.product_option_id,pso.value as option_name,psov.product_option_value_id,psov.price as price_option_value,psov.price_prefix as price_prefix_option_value,psov.weight as weight_option_value,psov.weight_prefix as weight_prefix_option_value,psov.value as option_detil_name, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id LEFT JOIN product_option pso ON p.product_id = pso.product_id LEFT JOIN product_option_value psov ON pso.product_option_id = psov.product_option_id WHERE p.product_id = " . $row['product_id'];
+                $query = "SELECT p.*,pso.product_option_id,pso.value as option_name,psov.product_option_value_id,psov.price as price_option_value,psov.price_prefix as price_prefix_option_value,psov.weight as weight_option_value,psov.weight_prefix as weight_prefix_option_value,psov.value as option_detil_name, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p LEFT JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id LEFT JOIN product_option pso ON p.product_id = pso.product_id LEFT JOIN product_option_value psov ON pso.product_option_id = psov.product_option_id WHERE p.product_id = " . $row['product_id'];
                 $result_json = $this->Model_crud->select_query($query);
 
                 if(!empty($result_json)){
@@ -275,7 +275,7 @@ class Process extends CI_Controller {
                     $products['data_single'] = array_values($products['data_single']);
                 }
 
-                if(is_array($products['data_option']) && !empty($products['data_option'])){
+                if(isset($products['data_option']) && !empty($products['data_option'])){
                     $products['data_option'] = array_values($products['data_option']);
                 }
 
@@ -371,12 +371,15 @@ public function save() {
 
             $json = json_decode($customer[0]['cart'], true);
 
+            
             if (count($json) > 0) {
 
                 $total = 0;
                 foreach($json as $row){
 
-                    $query_product = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $row['product_id'];
+                   
+
+                    $query_product = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p LEFT JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $row['product_id'];
 
                     $product_info = $this->Model_crud->select_query($query_product);
 
@@ -445,7 +448,7 @@ public function save() {
                 $total = 0;
                 foreach($json as $row){
 
-                    $query_product = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $row['product_id'];
+                    $query_product = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p LEFT JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $row['product_id'];
 
                     $product_info = $this->Model_crud->select_query($query_product);
 
@@ -665,7 +668,7 @@ public function save() {
     $data_email_option = array();
     if (count($json) > 0) {
         foreach ($json as $row) {
-            $query = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $row['product_id'];
+            $query = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p LEFT JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $row['product_id'];
             $products = $this->Model_crud->select_query($query);
 
             if ($products[0]['special']) {
@@ -692,12 +695,14 @@ public function save() {
                 );
             $ex_ins = $this->Model_crud->insert('order_product', $data_insert);
 
+           
+
             if(is_array($row['option']) && !empty($row['option'])){
             //Insert Data Order Option
 
                 foreach($row['option'] as $index => $value){
 
-                    $query_option = "SELECT pov.*, po.value as option_name FROM product_option_value pov JOIN product_option po ON pov.product_option_id = po.product_option_id WHERE pov.product_option_value_id = " . $value;
+                    $query_option  = "SELECT pov.*, po.value as option_name FROM product_option_value pov JOIN product_option po ON pov.product_option_id = po.product_option_id WHERE pov.product_option_value_id =' " . $value."'";
 
                     $data_option = $this->Model_crud->select_query($query_option);
 

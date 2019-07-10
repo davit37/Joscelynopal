@@ -22,10 +22,11 @@
                     <li><a href="<?php echo base_url('account/logout') ?>">Logout</a></li>
                     <?php } else { ?>
                     <li class="<?php echo ($this->uri->segment(2) == 'login') ? 'active':''; ?>"><a href="<?php echo base_url('account/login') ?>">Login</a></li>
-                    <?php } ?>
                     <li class="<?php echo ($this->uri->segment(2) == 'forgotten') ? 'active':''; ?>"><a href="<?php echo base_url('account/forgotten') ?>">Password</a></li>
                     <li class="<?php echo ($this->uri->segment(2) == 'register') ? 'active':''; ?>"><a href="<?php echo base_url('account/register') ?>">Register</a></li>
-                </ul>
+  
+                    <?php } ?>
+                 </ul>
 
                 <!-- Right -->
                 <ul class="nav navbar-nav navbar-right">

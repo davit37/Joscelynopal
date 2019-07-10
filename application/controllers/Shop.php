@@ -244,9 +244,10 @@ class Shop extends CI_Controller {
                 //Option
             $data['option'] = $this->Model_crud->select('option');
 
-                //Product Option
-            $data['product_options'] = $this->Model_crud->select_where('product_option', array("product_id"=>$data['product'][0]['product_id']));
-
+            //Product Option
+            $data['product_option'] = $this->Model_crud->select_where('p_option', array(
+                "id" => $data['product'][0]['option_id']
+            ));
                 //Product Option Value
             $data['product_option_values'] = $this->Model_crud->select_where('product_option_value', array("product_id"=>$data['product'][0]['product_id']));
 

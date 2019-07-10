@@ -125,11 +125,16 @@
                 </div>
                 <div class="text-group">
                     <div class="text1 text-group-desc-product">Price</div>
-                    <div class="text2 text-group-desc-product text-group-desc-product">: <span class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>">$</span><span id="prices" data-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" data-original-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>" value="<?php echo number_format($product[0]['price'], 2, '.', '') ?>"><?php echo number_format($product[0]['price'], 2, '.', '') ?></span></div>
+                    <div class="text2 text-group-desc-product text-group-desc-product">: <span class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>">$</span><span id="<?php echo $product_special ?'': 'prices'?>" data-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" data-original-price="<?php echo number_format($product[0]['price'], 2, '.', '') ?>" class="<?php echo ($product_special) ? 'has-special font-black' : ''; ?>" value="<?php echo number_format($product[0]['price'], 2, '.', '') ?>"><?php echo number_format($product[0]['price'], 2, '.', '') ?></span></div>
                 </div>
        
             
-              
+                <?php if ($product_special) { ?>
+                <div class="text-group">
+                    <div class="text1 text-group-desc-product"></div>
+                    <div class="text2 text-group-desc-product special-price-wrapper">&nbsp;&nbsp;<span>$</span><span id="prices" data-price="<?php echo number_format($product_special[0]['price'], 2, '.', '') ?>" data-original-price="<?php echo number_format($product_special[0]['price'], 2, '.', '') ?>" value="<?php echo number_format($product_special[0]['price'], 2, '.', '') ?>"><?php echo number_format($product_special[0]['price'], 2, '.', '') ?></span></div>
+                </div>
+                <?php } ?>
                 
 
                    <?php if($product_option != null){ foreach(json_decode($product_option[0]['json_child'],true) as $child_list){?>
@@ -145,7 +150,10 @@
 
                                 data-name='<?php echo str_replace(' ','_',strtolower($child_list['child_name'] ))  ?>'
                                 
-                                data-parent="<?php echo !empty($child_list['option_child_of']) ? str_replace(' ','_',strtolower($child_list['option_child_of'] )) : '' ?>" >
+                                data-parent="<?php echo !empty($child_list['option_child_of']) ? str_replace(' ','_',strtolower($child_list['option_child_of'] )) : '' ?>" 
+                                
+                                name='option'
+                                >
 
                                     <option data-price="0" value="">- Select -</option>
                             
@@ -165,12 +173,7 @@
                
           
 
-                <?php if ($product_special) { ?>
-                <div class="text-group">
-                    <div class="text1 text-group-desc-product"></div>
-                    <div class="text2 text-group-desc-product special-price-wrapper">&nbsp;&nbsp;<span>$</span><span id="special_price" data-price="<?php echo number_format($product_special[0]['price'], 2, '.', '') ?>" value="<?php echo number_format($product_special[0]['price'], 2, '.', '') ?>"><?php echo number_format($product_special[0]['price'], 2, '.', '') ?></span></div>
-                </div>
-                <?php } ?>
+                
                     <!-- <div class="text-group" style="margin-top: 36px;">
                         <div class="text1">Quantity</div>
                         <div class="text2 text-group-desc-product">: <input type="text" id="qty" name="qty" value="1" maxlength="2"></div>
@@ -491,19 +494,20 @@
 
         $('#button-cart').on('click', function() {
             var product_id = <?php echo $product[0]['product_id'] ?>;
+            var option_id = '<?php echo !empty($product_option) ? $product_option[0]['id']:'' ?>'
             var quantity = $('#qty').val();
 
             var option = [];
             $('[name^="option"]').each(function() {
                 if($(this).find('option').is(':selected') || $(this).is(':checked')) {
                     if($(this).val() !== '') {
-                        option.push($(this).val());
+                        option.push($(this).find('option:selected').text());
                     }
                 }
             });
 
             $.ajax({
-                url: '<?php echo base_url('checkout/cart/add') ?>/' + product_id + '/' + (typeof (quantity) != undefined ? quantity : 1),
+                url: '<?php echo base_url('checkout/cart/add') ?>/' + product_id + '/'+option_id +'/' + (typeof (quantity) != undefined ? quantity : 1),
                 method: 'POST',
                 data: {option},
                 dataType: 'json',
@@ -545,8 +549,8 @@
     //--></script>
 
     <script>
-        var json_option =<?php echo  $product_option[0]['json_child'] ?>;
-        var child_settings = `<?php echo  $product_option[0]['child_setting'] ?>`
+        var json_option =<?php echo  !empty($product_option)? $product_option[0]['json_child'] : "null" ?>;
+        var child_settings = `<?php echo  !empty($product_option)? $product_option[0]['child_setting']  : ''?>`
     
     </script>
     <script src="<?php echo base_url('assets/js/single_product.js'); ?>"></script>

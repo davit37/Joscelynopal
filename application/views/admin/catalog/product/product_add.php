@@ -111,12 +111,12 @@
                                     <input type="text" name="price" value="" placeholder="Price" id="input-price" class="form-control" />
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-quantity">Quantity</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="quantity" value="1" placeholder="Quantity" id="input-quantity" class="form-control" />
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-stock"><span data-toggle="tooltip" title="Status shown when a product is out of stock">Out Of Stock Status</span></label>
                                 <div class="col-sm-10">

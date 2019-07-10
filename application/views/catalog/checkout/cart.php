@@ -4,7 +4,6 @@
     <div class="row">
 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-
             <h1 class="title-page">Shopping Cart</h1>
 
             <?php if ($products) { ?>
@@ -45,12 +44,13 @@
 
         $date_end = strtotime($value['date_end']);
 
+
         if ($date_end >= $now) {
 
             $price = $value['special'];
 
         } else {
-
+          
             $price = $value['price'];
 
         }
@@ -82,23 +82,34 @@
 
                     echo '<div class="optItems">';
                     echo '<p>Price : <strong>$'.number_format($price, 2, '.', '').'</strong></p>';
-                    echo '</div>';
-                    if(!empty($products['data_option'])){
+                    echo '</div> ';
 
-                        foreach($products['data_option'] as $key => $row){
+                    if(!empty($cart[$index]['option'])){?>
 
-                            echo '<div class="optItems">';
-                            if($value['product_id'] == $row['product_id']){
+                        <div class="optItems">
 
-                                echo '<p>'.ucfirst($row['option_name']).' : '.$row['option_detil_name'].'  <strong>$'.number_format($row['price_option_value'], 2, '.', '').'</strong></p>';
+                            <p>Option : <?php echo implode('|',$cart[$index]['option'])?> = <strong>$<?php echo number_format($cart[$index]['option_cost'],2, '.','')?></strong></p>
+                        </div>
 
-                            }
 
-                            echo '</div>';
+                    <?php }
 
-                        }
+                    // if(!empty($products['data_option'])){
 
-                    }
+                    //     foreach($products['data_option'] as $key => $row){
+
+                    //         echo '<div class="optItems">';
+                    //         if($value['product_id'] == $row['product_id']){
+
+                    //             echo '<p>'.ucfirst($row['option_name']).' : '.$row['option_detil_name'].'  <strong>$'.number_format($row['price_option_value'], 2, '.', '').'</strong></p>';
+
+                    //         }
+
+                    //         echo '</div>';
+
+                    //     }
+
+                    // }
                     ?>
                 </div>
             </div>
@@ -106,19 +117,9 @@
         <?php 
         $subtotal = 0;
 
-        if(!empty($products['data_option'])){
-            $total_option = 0;
-            foreach($products['data_option'] as $key => $row){
-
-                if($value['product_id'] == $row['product_id']){
-
-                    $total_option+=$row['price_option_value'];    
-
-                } 
-
-            }
-
-            $subtotal = $price + $total_option;
+        if(!empty($cart[$index]['option_cost'])){
+            
+            $subtotal = $price + (float)$cart[$index]['option_cost'];
 
         } else {
 

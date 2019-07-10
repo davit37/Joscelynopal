@@ -8,9 +8,9 @@ child_settings = child_settings.split('\n');
 
 $(_option_list).change(function () {
 
-   var _this = $(this);
-   var _arr_selected = [];
-   var name = _this.data('name');
+   var _this          = $(this);
+   var _arr_selected  = [];
+   var name           = _this.data('name');
 
 
    $.each($(_option_list), function (i, v) {
@@ -39,9 +39,9 @@ $(_option_list).change(function () {
       _arr_selected.push(value.trim().toLowerCase());
    })
 
-   var cost = parseInt(get_cost(child_settings,_arr_selected));
-   var get_price = parseInt($('#prices').data('original-price'));
-   var tot = cost+get_price
+   var cost        = parseFloat(get_cost(child_settings,_arr_selected));
+   var get_price   = parseFloat($('#prices').data('original-price'));
+   var tot         = cost+get_price
 
 
    $('#prices').html(tot.toFixed(2));

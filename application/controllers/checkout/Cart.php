@@ -202,7 +202,7 @@ class Cart extends CI_Controller {
 
 
 
-                $query = "SELECT p.*,pso.product_option_id,pso.value as option_name,psov.product_option_value_id,psov.price as price_option_value,psov.price_prefix as price_prefix_option_value,psov.weight as weight_option_value,psov.weight_prefix as weight_prefix_option_value,psov.value as option_detil_name, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id LEFT JOIN product_option pso ON p.product_id = pso.product_id LEFT JOIN product_option_value psov ON pso.product_option_id = psov.product_option_id WHERE p.product_id = " . $row['product_id'];
+                $query = "SELECT p.*,pso.product_option_id,pso.value as option_name,psov.product_option_value_id,psov.price as price_option_value,psov.price_prefix as price_prefix_option_value,psov.weight as weight_option_value,psov.weight_prefix as weight_prefix_option_value,psov.value as option_detil_name, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p LEft JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id LEFT JOIN product_option pso ON p.product_id = pso.product_id LEFT JOIN product_option_value psov ON pso.product_option_id = psov.product_option_id WHERE p.product_id = " . $row['product_id'];
 
                 $result_json = $this->Model_crud->select_query($query);
 
@@ -422,7 +422,7 @@ class Cart extends CI_Controller {
 
 
 
-                if(is_array($products['data_option']) && !empty($products['data_option'])){
+                if(isset($products['data_option']) && !empty($products['data_option'])){
 
                     $products['data_option'] = array_values($products['data_option']);
 
@@ -462,40 +462,77 @@ class Cart extends CI_Controller {
 
 
 
-    //Navigation
+    // // //Navigation
+    // echo "<pre>";
+    // print_r($data);
+    // echo "</pre>";
+    
+    // return;
 
     $data['header'] = $this->Model_front->get_menu_header();
 
     $data['bottom'] = $this->Model_front->get_menu_bottom();
 
 
- /*   echo '<pre>';
-    print_r($products);
-    echo '</pre>';*/
-
-        //View
 
     $data['load_view'] = 'catalog/checkout/cart';
+
+
+    // echo "<pre>";
+    // print_r($data['products']);     
+    // echo"</pre>";
+    
 
     $this->load->view('template/frontend', $data);
 
 }
 
 
+//get cost option
+private function get_cost($arr1,$arr2){
 
-public function add($seg1 = '', $seg2 = '') {
+    function format_string($val){
+
+        return strtolower(trim($val));
+    }
+
+    foreach($arr1 as $arr){
+
+        $_temp = explode('=',$arr);//split cost and setting
+        
+        $_setting_arr = array_map('format_string',explode('|',$_temp[0]));
+
+        $_selected_option= array_map('format_string', $arr2);
+
+
+        if(implode($_setting_arr) == implode( $_selected_option)){
+         
+            return  $_temp[1];
+       
+        }
+    }
+
+    return 0;
+    
+    
+}
+
+
+public function add($seg1 = '', $option_id = '', $seg3 = '') {
 
 
 
-    $json = array();
+    $json               = array();
 
     $price              = 0;
 
     $total_option       = 0;
 
-    $option     = $this->input->post('option');
+    $option             = $this->input->post('option');
 
-    $product_id = $seg1;
+ 
+
+    $product_id         = $seg1;
 
     if (isset($product_id)) {
 
@@ -506,16 +543,18 @@ public function add($seg1 = '', $seg2 = '') {
         $product_id = 0;
 
     }
+  
+    $query = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p LEFT JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $product_id;
+    
+   if(is_array($option)){
 
+        $p_option = $this->Model_crud->select_where('p_option',array('id'=>$option_id)); 
 
-
-    $query = "SELECT p.*, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.product_id = " . $product_id;
-
-
+        $child_setting = explode("\n",$p_option[0]['child_setting']);
+        $option_cost  = $this->get_cost($child_setting,$option);
+   }
 
     $product_info = $this->Model_crud->select_query($query);
-
-
 
     if ($product_info) {
 
@@ -566,7 +605,6 @@ public function add($seg1 = '', $seg2 = '') {
         if ($this->session->userdata('uid')) {
 
             $customer = $this->Model_crud->select_where('customer', array('customer_id' => $this->session->userdata('uid')));
-
 
 
             if ($customer[0]['cart']) {
@@ -639,6 +677,8 @@ public function add($seg1 = '', $seg2 = '') {
 
         $flag = FALSE;
 
+
+
         foreach ($json as $row) {
 
             if ($row['product_id'] == $product_id) {
@@ -674,6 +714,7 @@ public function add($seg1 = '', $seg2 = '') {
                 "option" => $this->input->post('option'),
 
                 //"total" => number_format($total, 2, '.', '')
+                "option_cost" => isset($option_cost) ? $option_cost :''
 
                 );
 
@@ -821,6 +862,11 @@ public function remove($seg1 = '') {
 
         }
 
+            // echo "<pre>";
+            // print_r( $json );
+            // echo"</pre>";
+
+            // exit();
 
 
         if (count($json) > 0) {
@@ -838,6 +884,7 @@ public function remove($seg1 = '') {
                         "quantity" => $row['quantity'],
 
                         "option" => $row['option'],
+                        "option_cost"=>$row['option_cost']
 
                         );
 

@@ -242,7 +242,7 @@
 
                                 </div>
 
-                                <div class="form-group">
+                                <!-- <div class="form-group">
 
                                     <label class="col-sm-2 control-label" for="input-quantity">Quantity</label>
 
@@ -252,7 +252,7 @@
 
                                     </div>
 
-                                </div>
+                                </div> -->
 
                                 <div class="form-group">
 

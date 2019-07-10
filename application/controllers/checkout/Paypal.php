@@ -188,6 +188,7 @@ class Paypal extends CI_Controller {
 		}
 
 
+		
 
 		$data['shipping'] = 0;
 
@@ -404,6 +405,9 @@ class Paypal extends CI_Controller {
 							} else {
 
 
+								
+
+
 
 								if(!empty($json)){
 
@@ -467,7 +471,7 @@ class Paypal extends CI_Controller {
 
 
 
-					if(is_array($products['data_option']) && !empty($products['data_option'])){
+					if( !empty($products['data_option']) && is_array($products['data_option'])){
 
 						$products['data_option'] = array_values($products['data_option']);
 

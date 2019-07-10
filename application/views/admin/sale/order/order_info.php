@@ -347,6 +347,7 @@
                     </div>
 
                     <div id="tab-history" class="tab-pane">
+                    <div class="alert alert-info " style='display:none' id='history-alert'><i class="fa fa-info-circle"></i> <span></span></div>
 
                         <div id="history"><table class="table table-bordered">
 
@@ -549,6 +550,11 @@
                 
 
                 $('#history table tbody').append(html);
+
+                var history_alert = $("#history-alert");
+
+                history_alert.fadeIn();
+                history_alert.find('span').html("History was successfully added");
 
             },
 

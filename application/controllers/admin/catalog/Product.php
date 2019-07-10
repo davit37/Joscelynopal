@@ -222,7 +222,7 @@ class Product extends CI_Controller {
 
         $page = ($this->uri->segment(5)) ? $this->uri->segment(5) : 1;
 
-        $query = "select p.product_id, p.image, p.name as product_name, c.name as category_name, p.price, p.quantity, p.status, ps.price as special from product p join category c on p.category_id = c.category_id left join product_special ps on p.product_id = ps.product_id LIMIT ".(($page - 1) * $config['per_page']).", ".$config["per_page"];
+        $query = "SELECT p.product_id, p.image, p.name as product_name, c.name as category_name, p.price, p.quantity, p.status, ps.price as special from product p left join category c on p.category_id = c.category_id left join product_special ps on p.product_id = ps.product_id LIMIT ".(($page - 1) * $config['per_page']).", ".$config["per_page"];
 
         $data['results'] = $this->Model_crud->select_query($query);
 

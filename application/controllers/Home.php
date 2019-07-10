@@ -145,6 +145,9 @@ class Home extends CI_Controller {
 
         //View
         $data['load_view'] = 'view_home';
+
+
+        
         $this->load->view('template/frontend', $data);
     }
 

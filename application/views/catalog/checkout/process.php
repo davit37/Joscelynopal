@@ -328,22 +328,32 @@
                                                             echo '<div class="optItems">';
                                                             echo '<p>Price : <strong>$'.number_format($price, 2, '.', '').'</strong></p>';
                                                             echo '</div>';
-                                                            if(!empty($products['data_option'])){
 
-                                                                foreach($products['data_option'] as $key => $row){
+                                                            if(!empty($cart[$index]['option'])){?>
 
-                                                                    echo '<div class="optItems">';
-                                                                    if($value['product_id'] == $row['product_id']){
+                                                                <div class="optItems">
+                                        
+                                                                    <p>Option : <?php echo implode('|',$cart[$index]['option'])?> = <strong>$<?php echo number_format($cart[$index]['option_cost'],2, '.','')?></strong></p>
+                                                                </div>
+                                        
+                                        
+                                                            <?php }
+                                                            // if(!empty($products['data_option'])){
 
-                                                                        echo '<p>'.ucfirst($row['option_name']).' : '.$row['option_detil_name'].'  <strong>$'.number_format($row['price_option_value'], 2, '.', '').'</strong></p>';
+                                                            //     foreach($products['data_option'] as $key => $row){
 
-                                                                    }
+                                                            //         echo '<div class="optItems">';
+                                                            //         if($value['product_id'] == $row['product_id']){
 
-                                                                    echo '</div>';
+                                                            //             echo '<p>'.ucfirst($row['option_name']).' : '.$row['option_detil_name'].'  <strong>$'.number_format($row['price_option_value'], 2, '.', '').'</strong></p>';
 
-                                                                }
+                                                            //         }
 
-                                                            }
+                                                            //         echo '</div>';
+
+                                                            //     }
+
+                                                            // }
                                                             ?>
                                                         </div>
                                                     </div>
@@ -351,20 +361,10 @@
                                                 <?php 
                                                 $subtotal = 0;
 
-                                                if(!empty($products['data_option'])){
-                                                    $total_option = 0;
-                                                    foreach($products['data_option'] as $key => $row){
-
-                                                        if($value['product_id'] == $row['product_id']){
-
-                                                            $total_option+=$row['price_option_value'];    
-
-                                                        } 
-
-                                                    }
-
-                                                    $subtotal = $price + $total_option;
-
+                                                if(!empty($cart[$index]['option_cost'])){
+            
+                                                    $subtotal = $price + (float)$cart[$index]['option_cost'];
+                                        
                                                 } else {
 
                                                     $subtotal = $price;
