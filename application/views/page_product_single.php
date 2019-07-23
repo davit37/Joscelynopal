@@ -513,17 +513,19 @@
                 dataType: 'json',
                 success: function(json) {
 
+                    console.log(json)
+
                     if(json[0]) {
-                        $('#message-cart').empty();
+                        $('#message').empty();
                         $('#menu-cart').empty();
                         $(".overlay").css("visibility", "hidden");
-                        $('#message-cart').append('<div class="alert alert-success"><i class="fa fa-check-circle"></i> Your selected product added to cart<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        $('#message').append('<div class="alert alert-success"><i class="fa fa-check-circle"></i> Your selected product added to cart<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                         $('#menu-cart').append('<i class="fa fa-shopping-cart"></i> Cart (' + json.length + ')</a>');
                         $('html, body').animate({scrollTop: 0}, 'slow');
                     } else {
-                        $('#message-cart').empty();
+                        $('#message').empty();
                         $(".overlay").css("visibility", "hidden");
-                        $('#message-cart').append('<div class="alert alert-warning"><i class="fa fa-check-circle"></i> This product have required option<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        $('#message').append('<div class="alert alert-warning"><i class="fa fa-check-circle"></i> This product have required option<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                         $('html, body').animate({scrollTop: 0}, 'slow');
                     }
                 }

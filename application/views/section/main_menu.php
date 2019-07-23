@@ -37,6 +37,12 @@ $active = $this->uri->segment(1);
 </div>
 
 
+<br>
+<div id="message" class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+    <?php if(isset($_SESSION['alert'])){?>
+        <div class="alert <?= $_SESSION['alert'] ?>"> <?= $_SESSION['message'] ?>
+        <button type="button" class="close" data-dismiss="alert">×</button></div>
+    <?php  } ?>
 
-<div id="message" class="col-xs-12 col-sm-12 col-md-10 col-lg-10"></div>
+</div>
 

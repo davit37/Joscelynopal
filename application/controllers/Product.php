@@ -149,8 +149,13 @@ class Product extends CI_Controller {
             //Data Product
             $data['product'] = $this->Model_crud->select_where('product', array(
                 "slug" => $this->uri->segment(2),
-                "status" => 1
+                "status" => 1,
+                'sales_status' => 'available',
             ));
+
+            if(empty($data['product'])){
+                show_404($page = '', $log_error = TRUE);
+            }
             
             // Data Social Media
             $data['fb'] = $this->Model_crud->select_where('setting', array(
@@ -214,7 +219,8 @@ class Product extends CI_Controller {
             
             //Random Product
             $total_product = $this->Model_crud->total_row_where('product', array(
-                "status" => 1
+                "status" => 1,
+                "sales_status" => 'available',
             ));
             if ($total_product > 4) {
                 $limit = 4;
@@ -222,14 +228,15 @@ class Product extends CI_Controller {
                 $limit = $total_product;
             }
             $product = $this->Model_crud->select_where('product', array(
-                "status" => 1
+                "status" => 1,
+                "sales_status" => 'available',
             ));
             $number  = range(0, $total_product - 1);
             shuffle($number);
             $random_product = array();
             for ($i = 0; $i < $limit; $i++) {
                 $special = $this->Model_crud->select_where('product_special', array(
-                    "product_id" => $product[$number[$i]]['product_id']
+                    "product_id" => $product[$number[$i]]['product_id'],
                 ));
                 if ($special) {
                     $now      = strtotime(date('Y-m-d'));
@@ -262,7 +269,7 @@ class Product extends CI_Controller {
             $this->load->view('template/frontend', $data);
         } else {
             //Product
-            $query            = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1";
+            $query            = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1 AND p.sales_status = 'available'";
             $data['products'] = $this->Model_crud->select_query($query);
             
             //Navigation

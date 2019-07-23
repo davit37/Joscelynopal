@@ -28,9 +28,11 @@
                         //foreach ($value as $col) {
                             ?>
 
-                            <input type="hidden" name="item_name_<?php echo $i + 1; ?>" value="<?php echo $value['name'] ?>" >
+                            <input type="hidden" name="item_name_<?php echo $i + 1; ?>" value="<?php echo $value['name'] ?> : $<?php echo number_format($value['special'] ?  $value['special']:$value['price'], 2, '.', '')?> USD" >
                             <input type="hidden" name="quantity_<?php echo $i + 1; ?>" value="<?php echo $quantity[$i] ?>" >
-                            <?php
+                                
+                            
+                        <?php
                             
                             // Custom Variable for Paypal
                             if($this->session->userdata('value_order_id')){
@@ -55,24 +57,22 @@
 
                             $subtotal = 0;
                             $total_option = 0;
-                            if(!empty($products['data_option'])){
-                                foreach($products['data_option'] as $key => $row){
-                                    if($value['product_id'] == $row['product_id']){
-                                        $total_option+=$row['price_option_value'];    
-                                    } else {
-                                        $total_option = 0;
-                                    }
-                                }
+                            if(!empty($cart[$key]['option'])){
 
-                                $subtotal = $price + $total_option;
+                                
 
+                        ?>
+                            <input type="hidden" name="on0_<?php echo $i + 1; ?>" value="option(<?php echo implode(' | ',$cart[$key]['option'])?>)">
+                            <input type="hidden" name="os0_<?php echo $i + 1; ?>" value="$<?php echo number_format($cart[$key]['option_cost'], 2, '.', '') ?> USD">
+
+                        <?php                            
+                                $subtotal = $price + (float)$cart[$key]['option_cost'];
                             } else {
 
                                 $subtotal = $price;
 
                             }
-
-                            ?>
+                        ?>
 
                             <input type="hidden" name="amount_<?php echo $i + 1; ?>" value="<?php echo number_format($subtotal, 2, '.', ''); ?>" >
 
@@ -104,6 +104,6 @@ border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">';*
 
 <script type="text/javascript"><!--
 
-    $("#paypalForm").submit();
+   $("#paypalForm").submit();
 
     //--></script>

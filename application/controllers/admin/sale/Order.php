@@ -1872,7 +1872,9 @@ class Order extends CI_Controller
         ));
 
 
+        $data['order_option'] = json_decode($data['order_detail'][0]['option']);
 
+      
 
         //View
         $data['load_view'] = 'admin/sale/order/order_info';
@@ -1973,6 +1975,8 @@ class Order extends CI_Controller
                 ->select_where('order_history', array(
                 'order_id' => $order_id
             ));
+
+            $order_option = 
 
 
       

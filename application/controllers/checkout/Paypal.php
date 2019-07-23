@@ -139,6 +139,8 @@ class Paypal extends CI_Controller {
 
 
 
+
+
         //Category
 
 		$data['category'] = $this->Model_crud->select_where_order('category', array("status" => 1), 'sort_order', 'asc');
@@ -224,22 +226,18 @@ class Paypal extends CI_Controller {
 
 			foreach ($json as $row) {
 
-				$query = "SELECT p.*,pso.product_option_id,pso.value as option_name,psov.product_option_value_id,psov.price as price_option_value,psov.price_prefix as price_prefix_option_value,psov.weight as weight_option_value,psov.weight_prefix as weight_prefix_option_value,psov.value as option_detil_name, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id LEFT JOIN product_option pso ON p.product_id = pso.product_id LEFT JOIN product_option_value psov ON pso.product_option_id = psov.product_option_id WHERE p.product_id = " . $row['product_id'];
+			
 
+				$query = "SELECT p.*,pso.product_option_id,pso.value as option_name,psov.product_option_value_id,psov.price as price_option_value,psov.price_prefix as price_prefix_option_value,psov.weight as weight_option_value,psov.weight_prefix as weight_prefix_option_value,psov.value as option_detil_name, c.name as category_name, c.slug as category_slug , ps.price as special, ps.date_end FROM product p LEFT JOIN category c ON p.category_id = c.category_id LEFT JOIN product_special ps ON p.product_id = ps.product_id LEFT JOIN product_option pso ON p.product_id = pso.product_id LEFT JOIN product_option_value psov ON pso.product_option_id = psov.product_option_id WHERE p.product_id = " . $row['product_id'];
 				$result_json = $this->Model_crud->select_query($query);
 
 
 
 				if(!empty($result_json)){
 
-
-
 					foreach($result_json as $index => $value){
 
-
-
 						$userdata = '';
-
 
 
 						if ($this->session->userdata('uid')) {
@@ -248,17 +246,11 @@ class Paypal extends CI_Controller {
 
 						}
 
-
-
 						if ($this->session->userdata('guest_cart')) {
 
 							$userdata = 'guess';
 
 						}
-
-
-
-
 
 						$products['data_single'][$value['product_id']] = array(
 
@@ -529,9 +521,11 @@ class Paypal extends CI_Controller {
 
 		/* Get Paypal Setting End */
 
+		  // Check if Products have item or not'
 
-
-        // Check if Products have item or not
+		echo"<pre>";
+		print_r($data['products']);
+		echo"</pre>";
 
         if(!$data['products']) {  // if product empty
 
@@ -549,10 +543,7 @@ class Paypal extends CI_Controller {
 
         
 
-        //View
-
-
-
+    
         $data['load_view'] = 'catalog/checkout/paypal';
 
         $this->load->view('template/frontend', $data);

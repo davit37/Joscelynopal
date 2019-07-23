@@ -64,6 +64,14 @@ class Success extends CI_Controller {
         $data = $this->data;
         $status_paypal = $this->input->post('payment_status',true);
 
+        $data['cart'] = array();
+        if ($this->session->userdata('uid')) {
+            $customer = $this->Model_crud->select_where('customer', array('customer_id' => $this->session->userdata('uid')));
+            if ($customer[0]['cart']) {
+                $data['cart'] = json_decode($customer[0]['cart'], true);
+            }    
+        }
+
         if(isset($status_paypal) && $status_paypal == 'Completed'){
 
             if($this->session->userdata('guest_cart')){

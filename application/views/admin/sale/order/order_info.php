@@ -6,11 +6,11 @@
 
             <div class="pull-right">
 
-                <a class="btn btn-info" title="" data-toggle="tooltip" target="_blank" href="<?php echo base_url('admin/sale/order/invoice/'.$order_id) ?>" data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
+                <a class="btn btn-info" title="" data-toggle="tooltip" target="_blank" href="<?= base_url('admin/sale/order/invoice/'.$order_id) ?>" data-original-title="Print Invoice"><i class="fa fa-print"></i></a>
 
-                <a class="btn btn-primary" title="" data-toggle="tooltip" href="<?php echo base_url('admin/sale/order/edit/'.$order_id) ?>" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-primary" title="" data-toggle="tooltip" href="<?= base_url('admin/sale/order/edit/'.$order_id) ?>" data-original-title="Edit"><i class="fa fa-pencil"></i></a>
 
-                <a class="btn btn-default" title="" data-toggle="tooltip" href="<?php echo base_url('admin/sale/order') ?>" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
+                <a class="btn btn-default" title="" data-toggle="tooltip" href="<?= base_url('admin/sale/order') ?>" data-original-title="Cancel"><i class="fa fa-reply"></i></a>
 
             </div>
 
@@ -18,9 +18,9 @@
 
             <ul class="breadcrumb">
 
-                <li><a href="<?php echo base_url('admin/dashboard') ?>">Home</a></li>
+                <li><a href="<?= base_url('admin/dashboard') ?>">Home</a></li>
 
-                <li><a href="<?php echo base_url('admin/sale/order') ?>">Orders</a></li>
+                <li><a href="<?= base_url('admin/sale/order') ?>">Orders</a></li>
 
             </ul>
 
@@ -64,7 +64,7 @@
 
                                     <td>Order ID:</td>
 
-                                    <td>#<?php echo $order_detail[0]['order_id'] ?></td>
+                                    <td>#<?= $order_detail[0]['order_id'] ?></td>
 
                                 </tr>
 
@@ -72,7 +72,7 @@
 
                                     <td>Invoice No.:</td>
 
-                                    <td><?php echo $order_detail[0]['invoice'] ?></td>
+                                    <td><?= $order_detail[0]['invoice'] ?></td>
 
                                 </tr>
 
@@ -80,7 +80,7 @@
 
                                     <td>Customer:</td>
 
-                                    <td><?php echo $order_detail[0]['firstname']." ".$order_detail[0]['lastname'] ?></td>
+                                    <td><?= $order_detail[0]['firstname']." ".$order_detail[0]['lastname'] ?></td>
 
                                 </tr>
 
@@ -88,7 +88,7 @@
 
                                     <td>E-Mail:</td>
 
-                                    <td><a href="mailto:fahmil.arief26@gmail.com"><?php echo $order_detail[0]['email'] ?></a></td>
+                                    <td><a href="mailto:fahmil.arief26@gmail.com"><?= $order_detail[0]['email'] ?></a></td>
 
                                 </tr>
 
@@ -96,7 +96,7 @@
 
                                     <td>Telephone:</td>
 
-                                    <td><?php echo $order_detail[0]['telephone'] ?></td>
+                                    <td><?= $order_detail[0]['telephone'] ?></td>
 
                                 </tr>
 
@@ -104,7 +104,7 @@
 
                                     <td>Total:</td>
 
-                                    <td>$<?php echo number_format($order_detail[0]['total'], 2, '.', '') ?></td>
+                                    <td>$<?= number_format($order_detail[0]['total'], 2, '.', '') ?></td>
 
                                 </tr>
 
@@ -112,7 +112,7 @@
 
                                     <td>Order Status:</td>
 
-                                    <td id="order-status"><?php echo $last_order_history ?></td>
+                                    <td id="order-status"><?= $last_order_history ?></td>
 
                                 </tr>
 
@@ -120,7 +120,7 @@
 
                                     <td>IP Address:</td>
 
-                                    <td><?php echo $order_detail[0]['ip'] ?></td>
+                                    <td><?= $order_detail[0]['ip'] ?></td>
 
                                 </tr>
 
@@ -128,7 +128,7 @@
 
                                     <td>User Agent:</td>
 
-                                    <td><?php echo $order_detail[0]['user_agent'] ?></td>
+                                    <td><?= $order_detail[0]['user_agent'] ?></td>
 
                                 </tr>
 
@@ -136,7 +136,7 @@
 
                                     <td>Accept Language:</td>
 
-                                    <td><?php echo $order_detail[0]['accept_language'] ?></td>
+                                    <td><?= $order_detail[0]['accept_language'] ?></td>
 
                                 </tr>
 
@@ -144,7 +144,7 @@
 
                                     <td>Date Added:</td>
 
-                                    <td><?php echo date("d/m/Y", strtotime($order_detail[0]['date_added'])) ?></td>
+                                    <td><?= date("d/m/Y", strtotime($order_detail[0]['date_added'])) ?></td>
 
                                 </tr>
 
@@ -152,7 +152,7 @@
 
                                     <td>Date Modified:</td>
 
-                                    <td><?php echo date("d/m/Y", strtotime($order_detail[0]['date_modified'])) ?></td>
+                                    <td><?= date("d/m/Y", strtotime($order_detail[0]['date_modified'])) ?></td>
 
                                 </tr>
 
@@ -168,7 +168,7 @@
 
                                     <td>First Name:</td>
 
-                                    <td><?php echo $order_detail[0]['firstname'] ?></td>
+                                    <td><?= $order_detail[0]['firstname'] ?></td>
 
                                 </tr>
 
@@ -176,7 +176,7 @@
 
                                     <td>Last Name:</td>
 
-                                    <td><?php echo $order_detail[0]['lastname'] ?></td>
+                                    <td><?= $order_detail[0]['lastname'] ?></td>
 
                                 </tr>
 
@@ -184,7 +184,7 @@
 
                                     <td>Address 1:</td>
 
-                                    <td><?php echo $order_detail[0]['address_1'] ?></td>
+                                    <td><?= $order_detail[0]['address_1'] ?></td>
 
                                 </tr>
 
@@ -192,7 +192,7 @@
 
                                     <td>Address 2:</td>
 
-                                    <td><?php echo $order_detail[0]['address_2'] ?></td>
+                                    <td><?= $order_detail[0]['address_2'] ?></td>
 
                                 </tr>
 
@@ -200,7 +200,7 @@
 
                                     <td>City:</td>
 
-                                    <td><?php echo $order_detail[0]['city'] ?></td>
+                                    <td><?= $order_detail[0]['city'] ?></td>
 
                                 </tr>
 
@@ -208,7 +208,7 @@
 
                                     <td>Postcode:</td>
 
-                                    <td><?php echo $order_detail[0]['postcode'] ?></td>
+                                    <td><?= $order_detail[0]['postcode'] ?></td>
 
                                 </tr>
 
@@ -216,7 +216,7 @@
 
                                     <td>Region / State:</td>
 
-                                    <td><?php echo $zone[0]['name'] ?></td>
+                                    <td><?= $zone[0]['name'] ?></td>
 
                                 </tr>
 
@@ -224,7 +224,7 @@
 
                                     <td>Country:</td>
 
-                                    <td><?php echo $country[0]['name'] ?></td>
+                                    <td><?= $country[0]['name'] ?></td>
 
                                 </tr>
 
@@ -242,7 +242,7 @@
 
                                     <td>Payment Method:</td>
 
-                                    <td><?php echo $order_detail[0]['payment_method'] ?></td>
+                                    <td><?= $order_detail[0]['payment_method'] ?></td>
 
                                 </tr>
 
@@ -250,7 +250,7 @@
 
                                     <td>Payment Comment:</td>
 
-                                    <td><?php echo ($order_detail[0]['payment_comment']) ? $order_detail[0]['payment_comment']:''; ?></td>
+                                    <td><?= ($order_detail[0]['payment_comment']) ? $order_detail[0]['payment_comment']:''; ?></td>
 
                                 </tr>
 
@@ -258,7 +258,7 @@
 
                                     <td>Shipping Method:</td>
 
-                                    <td><?php echo $order_detail[0]['shipping_method'] ?></td>
+                                    <td><?= $order_detail[0]['shipping_method'] ?></td>
 
                                 </tr>
 
@@ -266,7 +266,7 @@
 
                                     <td>Shipping Comment:</td>
 
-                                    <td><?php echo ($order_detail[0]['shipping_comment']) ? $order_detail[0]['shipping_comment']:''; ?></td>
+                                    <td><?= ($order_detail[0]['shipping_comment']) ? $order_detail[0]['shipping_comment']:''; ?></td>
 
                                 </tr>
 
@@ -276,7 +276,7 @@
 
                                     <td>Shipping Country:</td>
 
-                                    <td><?php echo $order_shipping_country[0]['name'];?></td>
+                                    <td><?= $order_shipping_country[0]['name'];?></td>
 
                                 </tr>
 
@@ -286,7 +286,7 @@
 
                                     <td>Shipping Price:</td>
 
-                                    <td><?php echo '$ '.number_format($order_shipping_country[0]['shipping_price'], 2, '.', '');?></td>
+                                    <td><?= '$ '.number_format($order_shipping_country[0]['shipping_price'], 2, '.', '');?></td>
 
                                 </tr>
 
@@ -309,6 +309,7 @@
                                     <td class="text-left">Product</td>
 
                                     <td class="text-left">Category</td>
+                                    <td class="text-left">Option</td>
 
                                     <td class="text-right">Unit Price</td>
 
@@ -318,15 +319,23 @@
 
                             <tbody>
 
-                                <?php foreach ($order_products as $row) { ?>
+                                <?php foreach ($order_products as $key=>$row) { 
+
+                                    $order_option_list   = empty($order_option[$key]->option) ?'':implode('|',$order_option[$key]->option);
+
+                                    $option_cost =  empty($order_option[$key]->option) ?  '':" + $".number_format($order_option[$key]->option_cost, 2, '.', '');
+
+                                    $order_price    = number_format($row['price'], 2, '.', ''). $option_cost;
+                                ?>
 
                                 <tr>
 
-                                    <td class="text-left"><?php echo $row['name'] ?></td>
+                                    <td class="text-left"><?= $row['name'] ?></td>
 
-                                    <td class="text-left"><?php echo $row['category'] ?></td>
+                                    <td class="text-left"><?= $row['category'] ?></td>
+                                    <td class='text-left'><?=  $order_option_list  ?></td>
 
-                                    <td class="text-right">$<?php echo number_format($row['price'], 2, '.', '') ?></td>
+                                    <td class="text-right">$<?= $order_price  ?></td>
 
                                 </tr>
 
@@ -334,9 +343,9 @@
 
                                 <tr>
 
-                                    <td class="text-right" colspan="2">Total:</td>
+                                    <td class="text-right" colspan="3">Total:</td>
 
-                                    <td class="text-right">$<?php echo number_format($order_total[0]['value'], 2, '.', '') ?></td>
+                                    <td class="text-right">$<?= number_format($order_total[0]['value'], 2, '.', '') ?></td>
 
                                 </tr>
 
@@ -373,13 +382,13 @@
 
                                     <tr>
 
-                                        <td class="text-left"><?php echo date("d/m/Y", strtotime($row['date_added'])) ?></td>
+                                        <td class="text-left"><?= date("d/m/Y", strtotime($row['date_added'])) ?></td>
 
-                                        <td class="text-left"><?php echo ($row['comment']) ? $row['comment'] : ''; ?></td>
+                                        <td class="text-left"><?= ($row['comment']) ? $row['comment'] : ''; ?></td>
 
-                                        <td class="text-left"><?php echo $row['order_status'] ?></td>
+                                        <td class="text-left"><?= $row['order_status'] ?></td>
 
-                                        <td class="text-left"><?php echo ($row['notify'] == 0) ? 'No' : 'Yes'; ?></td>
+                                        <td class="text-left"><?= ($row['notify'] == 0) ? 'No' : 'Yes'; ?></td>
 
                                     </tr>
 
@@ -507,13 +516,13 @@
 
         var comment = $('#input-comment').val();
 
-        var order_id = '<?php echo $order_id ?>';
+        var order_id = '<?= $order_id ?>';
 
         
 
         $.ajax({
 
-            url: '<?php echo base_url('admin/sale/order/notify') ?>',
+            url: '<?= base_url('admin/sale/order/notify') ?>',
 
             type: 'post',
 

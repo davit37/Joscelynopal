@@ -133,7 +133,7 @@ class Home extends CI_Controller {
         }
 
         //Product
-        $query = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1 ORDER BY p.featured DESC LIMIT 8";
+        $query = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1 And p.sales_status='available' ORDER BY p.featured DESC LIMIT 8";
         $data['products'] = $this->Model_crud->select_query($query);
         
         //Slideshow

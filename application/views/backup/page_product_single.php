@@ -382,7 +382,7 @@
                         <label for="email" class="control-label">Email:</label>
                         <input type="email" class="form-control" id="email" name="email">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group"id='message'>
                         <label for="recipient-name" class="control-label">Rating:</label>
                         <select class="form-control" id="rating" name="rating">
                             <option value="1">Very Bad</option>
