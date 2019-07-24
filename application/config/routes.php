@@ -73,4 +73,3 @@ $route['review'] = 'review/index';
 $route['review/form'] = 'review/form';
 $route['review/(:any)'] = 'review/index/$1';
 $route['admin'] = 'admin/login/frontpage';
-$route['(:any)'] = 'page/index';

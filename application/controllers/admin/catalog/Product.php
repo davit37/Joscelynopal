@@ -1023,11 +1023,6 @@ class Product extends CI_Controller {
         $product_special_date_end = $this->input->post('product_special_date_end');
 
         if (empty($product_special_id)) {
-
-
-
-      
-
             $data_insert = array(
 
                 "product_id" => $product_id,
@@ -1040,8 +1035,13 @@ class Product extends CI_Controller {
 
                 );
 
+            $is_duplicate = $this->Model_crud->check_duplicate('product_special',['product_id'=>$product_id]);
 
-            $ex_upd = $this->Model_crud->insert('product_special', $data_insert);
+
+            if(!$is_duplicate){
+                $ex_upd = $this->Model_crud->insert('product_special', $data_insert);
+
+            }  
 
         } else {
 
@@ -1726,6 +1726,8 @@ class Product extends CI_Controller {
         echo json_encode($json);
 
     }
+
+
 
 
 

@@ -191,5 +191,5 @@ class Model_crud extends CI_Model {
             }
         }
     }
-    
+     
 }

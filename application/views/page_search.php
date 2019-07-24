@@ -1,6 +1,10 @@
+
+
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
     <div class="product-wrap">
         <div class="row">
+
+   
             <?php if($products) { ?>
             
             <?php $i = 0;
@@ -21,7 +25,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
                     <div class="product-item-wrap">
                         <div class="product-image" style="background-image: url(<?php echo base_url('upload/' . $product['image']); ?>);"></div>
-                        <div class="product-title text-center"><a href="<?php echo base_url('product/'.$product['slug']); ?>"><?php echo $product['name'] ?></a></div>
+                        <div class="product-title text-center"><a href="<?php echo base_url('product/'.$product['slug']); ?>"><?php echo  word_limiter(strip_tags($product['name']), 3)?></a></div>
                         <div class="item-desc text-center"><?php echo word_limiter($product['description'], 8); ?></div>
                         <div class="item-price text-center <?php echo ($flag_special) ? 'has-special' : ''; ?>">$<?php echo number_format($product['price'], 2, '.', '') ?></div>
                         <div class="item-disc text-center">

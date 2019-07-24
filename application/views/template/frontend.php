@@ -78,7 +78,9 @@
 	</script> -->
     </head>
     <body>
+
         <?php
+
         //Menu
         if ($this->uri->segment(1) != FALSE) {
             $this->load->view('section/menu');

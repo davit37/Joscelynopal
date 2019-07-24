@@ -136,9 +136,14 @@ class Search extends CI_Controller {
 
     public function index($seg1 = '') {
 
+
+        
+
         if($seg1 == '') {
 
             $filter = $this->input->post('search');
+
+          
 
         } else {
 
@@ -196,6 +201,8 @@ class Search extends CI_Controller {
 
         $query = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.name LIKE '%".$filter."%' ESCAPE '!'";
 
+
+        
         $data['products'] = $this->Model_crud->select_query($query);
 
         
@@ -228,7 +235,7 @@ class Search extends CI_Controller {
 
         $data['bottom'] = $this->Model_front->get_menu_bottom();
 
-        
+       
 
         //View
 

@@ -269,7 +269,8 @@ class Product extends CI_Controller {
             $this->load->view('template/frontend', $data);
         } else {
             //Product
-            $query            = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1 AND p.sales_status = 'available'";
+            $query   = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1 AND p.sales_status = 'available'";
+            
             $data['products'] = $this->Model_crud->select_query($query);
             
             //Navigation
