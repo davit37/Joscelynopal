@@ -30,6 +30,9 @@
         <meta name="msapplication-TileImage" content="<?php echo base_url("assets/favicon/ms-icon-144x144.png") ?>">
         <meta name="theme-color" content="#ffffff">
 
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
         <!-- Main Css -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/style.css').'?'.md5(date('c'));?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/override.css').'?'.md5(date('c'));?>">

@@ -151,7 +151,6 @@ class Product extends CI_Controller {
         $data["links"] = $this->pagination->create_links();
 
 
-
         $data['load_view'] = 'admin/catalog/product/product_list';
 
         $this->load->view('admin/template/backend', $data);
@@ -226,6 +225,8 @@ class Product extends CI_Controller {
 
         $data['results'] = $this->Model_crud->select_query($query);
 
+        $data['special_price'] = $this->Model_crud->select('product_special');
+
         $config["total_rows"] = $this->Model_crud->total_row('product');
 
         $this->pagination->initialize($config);
@@ -262,7 +263,7 @@ class Product extends CI_Controller {
 
         $data["links"] = $this->pagination->create_links();
 
-
+ 
 
         $data['load_view'] = 'admin/catalog/product/product_list';
 
@@ -1008,174 +1009,7 @@ class Product extends CI_Controller {
         }
 
         //Update Data Product Option
-        if(!empty($option_type)) {
-
-            $check_db_product_option = $this->Model_crud->select_where('product_option',array('product_id' => $product_id));
-
-            for ($i = 0; $i < count($product_option_id); $i++) {
-
-                if(empty($product_option_id[$i])){
-
-                    for($j = 0; $j < count($opt_value[$i]); $j++) {
-
-                        if(empty($opt_value_id[$i][$j]) && !empty($opt_value[$i][$j]) && !empty($opt_price[$i][$j])){
-
-                            $data_option = array(
-
-                                "product_id" => $product_id,
-
-                                "option_id" => $option_type[$i],
-
-                                "value" => $option_name[$i],
-
-                                "required" => $option_required[$i]
-
-                                );
-
-                            $ex_ins = $this->Model_crud->insert('product_option', $data_option);
-
-                            $new_product_option_id = $this->Model_crud->inserted_id();
-
-                            $data_option_value = array(
-
-                                "product_option_id" => $new_product_option_id,
-
-                                "product_id" => $product_id,
-
-                                "option_id" => $option_type[$i],
-
-                                "value" => $opt_value[$i][$j],
-
-                                "price" => $opt_price[$i][$j],
-
-                                "weight" => $opt_weight[$i][$j]
-
-                                );
-
-                            $ex_ins = $this->Model_crud->insert('product_option_value', $data_option_value);
-
-                        }            
-                    }
-
-                } else {
-
-                    if(!empty($check_db_product_option)){
-                        foreach($check_db_product_option as $index => $value){
-                            if(in_array($value['product_option_id'],$product_option_id)){
-
-                                if($product_option_id[$i] == $value['product_option_id']){
-
-                                    for($j = 0; $j < count($opt_value[$i]); $j++) {
-
-                                        if(!empty($opt_value_id[$i][$j]) && !empty($opt_value[$i][$j]) && !empty($opt_price[$i][$j])){
-
-                                            $update_data_option = array(
-
-                                                "product_id" => $product_id,
-
-                                                "option_id" => $option_type[$i],
-
-                                                "value" => $option_name[$i],
-
-                                                "required" => $option_required[$i]
-
-                                                );
-
-                                            $ex_upd = $this->Model_crud->update('product_option', $update_data_option,array('product_option_id' => $value['product_option_id']));
-
-                                            $update_data_option_value = array(
-
-                                                "product_option_id" => $product_option_id[$i],
-
-                                                "product_id" => $product_id,
-
-                                                "option_id" => $option_type[$i],
-
-                                                "value" => $opt_value[$i][$j],
-
-                                                "price" => $opt_price[$i][$j],
-
-                                                "weight" => $opt_weight[$i][$j]
-
-                                                );
-
-                                            $ex_upd = $this->Model_crud->update('product_option_value', $update_data_option_value,array('product_option_value' => $opt_value_id[$i][$j]));
-                                        } else {
-
-                                            $data_option_value = array(
-
-                                                "product_option_id" => $product_option_id[$i],
-
-                                                "product_id" => $product_id,
-
-                                                "option_id" => $option_type[$i],
-
-                                                "value" => $opt_value[$i][$j],
-
-                                                "price" => $opt_price[$i][$j],
-
-                                                "weight" => $opt_weight[$i][$j]
-
-                                                );
-
-                                            $ex_ins = $this->Model_crud->insert('product_option_value', $data_option_value);
-
-                                        }
-                                    }
-
-                                }
-
-                            } else {
-                                $this->Model_crud->delete('product_option',array("product_option_id" => $value['product_option_id']));
-                                $this->Model_crud->delete('product_option_value',array("product_option_id" => $value['product_option_id']));
-                            }
-                        }
-                    } else {
-
-                        for($j = 0; $j < count($opt_value[$i]); $j++) {
-
-                            if(empty($opt_value_id[$i][$j]) && !empty($opt_value[$i][$j]) && !empty($opt_price[$i][$j])){
-
-                                $data_option = array(
-
-                                    "product_id" => $product_id,
-
-                                    "option_id" => $option_type[$i],
-
-                                    "value" => $option_name[$i],
-
-                                    "required" => $option_required[$i]
-
-                                    );
-
-                                $ex_ins = $this->Model_crud->insert('product_option', $data_option);
-
-                                $new_product_option_id = $this->Model_crud->inserted_id();
-
-                                $data_option_value = array(
-
-                                    "product_option_id" => $new_product_option_id,
-
-                                    "product_id" => $product_id,
-
-                                    "option_id" => $option_type[$i],
-
-                                    "value" => $opt_value[$i][$j],
-
-                                    "price" => $opt_price[$i][$j],
-
-                                    "weight" => $opt_weight[$i][$j]
-
-                                    );
-
-                                $ex_ins = $this->Model_crud->insert('product_option_value', $data_option_value);
-
-                            }
-                        }
-                    }
-                } 
-            }
-        }
+        
         //Update Data Product Special
 
         //Delete old data first
@@ -1190,6 +1024,10 @@ class Product extends CI_Controller {
 
         if (empty($product_special_id)) {
 
+
+
+      
+
             $data_insert = array(
 
                 "product_id" => $product_id,
@@ -1202,9 +1040,12 @@ class Product extends CI_Controller {
 
                 );
 
+
             $ex_upd = $this->Model_crud->insert('product_special', $data_insert);
 
         } else {
+
+
 
             $data_update = array(
 
@@ -1216,11 +1057,12 @@ class Product extends CI_Controller {
 
                 "date_end" => $product_special_date_end
 
-                );
+            );
 
             $ex_upd = $this->Model_crud->update('product_special', $data_update,array('product_special_id' => $product_special_id));
 
         }
+
 
 
 
@@ -1487,6 +1329,7 @@ class Product extends CI_Controller {
         $query .= " ORDER BY $sort $sort_by LIMIT ".(($page - 1) * $config['per_page']).", ".$config["per_page"];
 
         $data['results'] = $this->Model_crud->select_query($query);
+        $data['special_price'] = $this->Model_crud->select('product_special');
 
         $this->pagination->initialize($config);
 

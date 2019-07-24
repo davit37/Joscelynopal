@@ -864,15 +864,15 @@ a {
 
     text-decoration: none;
 
-    font-family: 'BebasNeue Thin';
+    font-family: 'Roboto';
 
-    font-size: 18px;
+    font-size: 14px;
 
     word-spacing: 3px;
 
     letter-spacing: 1px;
 
-    font-weight: 600;
+   
 }
 
 #menu-sort li.active a {
@@ -913,14 +913,15 @@ a {
 }
 
 .product-item-wrap {
-
-    background: #E4E4E4;
-
     padding: 10px;
-
     margin-bottom: 20px;
-
     padding-bottom: 15px;
+    
+    
+}
+
+.product-item-wrap:hover{
+    box-shadow: 0 1px 6px rgba(0,0,0,.3);
 }
 
 .product-image {
@@ -955,15 +956,15 @@ a {
 
 .item-desc {
 
-    font-family: 'BebasNeue Light';
-
-    font-size: 18px;
-
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
     letter-spacing: 1px;
-
-    font-weight: 600;
-
+    
+    margin-bottom: 15px;
+    line-height: 15px;
 }
+
+
 
 .item-price {
 
@@ -971,7 +972,7 @@ a {
 
     font-family: 'Gotham';
 
-    font-size: 18px;
+    font-size: 15px;
 
 }
 
@@ -979,9 +980,9 @@ a {
 
     height: 20px;
 
-    font-family: 'BebasNeue Light';
+    font-family: 'Roboto', sans-serif;
 
-    font-size: 18px;
+    font-size: 15px;
 
     letter-spacing: 1px;
 

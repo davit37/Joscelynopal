@@ -206,6 +206,7 @@
 
                                                                 $now = strtotime(date('Y-m-d'));
                                                                 $date_end = strtotime($val['date_end']);
+                                                          
                                                                 if($date_end >= $now ) {
                                                                     $flag_special_price = true;
                                                                     $price = $val['price'];
