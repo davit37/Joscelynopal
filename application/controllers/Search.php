@@ -199,7 +199,7 @@ class Search extends CI_Controller {
 
         //Data Product
 
-        $query = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.name LIKE '%".$filter."%' ESCAPE '!'";
+        $query = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.name LIKE '%".$filter."%' ESCAPE '!' AND  p.sales_status = 'available'";
 
 
         

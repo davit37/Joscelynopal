@@ -13,6 +13,62 @@
             <div id="accordion" class="panel-group">
                 <form enctype="multipart/form-data" method="post" action="<?php echo base_url('checkout/process/save') ?>">
                     <!-- Customer Detail Start -->
+                    <?php 
+                        if(count($products) === count($sold_out_status) ){ ?>
+
+                                <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Item Sold Out <i class="fa fa-caret-down"></i></a></h4>
+                                </div>
+                                <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                        <div  class="items-message col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                
+                                            <div class="alert alert-warning">This Items has bought by another user
+                                            <button type="button" class="close" data-dismiss="alert">×</button></div>
+                                        
+                                        </div>
+                                        <div class="panel-body">
+
+                                           
+
+                                             <div class="wrap cf">
+                                                <div class="cart">
+                                                    <ul class="cartWrap">
+                                                        <?php foreach ($products as $key => $value) { 
+
+                                                            if($value['sales_status']=="sold_out"){?>
+
+                                                                <li class="items">
+
+                                                                    <div class="infoWrap"> 
+                                                                        <div class="cartSection">
+                                                                            <div class="cartDesc">
+                                                                                <img src="<?= base_url('upload').'/'.$value['image'];?>" alt="<?= $value['name'];?>" class="itemImg" />
+                                                                            </div>  
+                                                                            
+                                                                            <div class="cartDesc mainCartDesc">
+                                                                                 <h3><?= $value['name'];?></h3>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div> 
+
+                                                                </li>                                                 
+                                                        
+                                                        
+                                                        <?php } }?>
+                                                    </ul>
+
+                                                    <a class="btn continue" href="http://localhost/joscelynopal/home">Continue Shopping</a>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                
+                                </div>
+                            </div>
+                               
+                    <?php }  else { ?>
+
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-payment-address" aria-expanded="true">Customer Details <i class="fa fa-caret-down"></i></a></h4>
@@ -238,7 +294,7 @@
                                     <?php if($paypal[0]['status'] == 1) { ?>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" <?php echo ($this->session->userdata('value_payment_method') == 'Paypal') ? 'checked="checked"':''; ?> value="Paypal" name="payment_method">
+                                            <input type="radio" <?php echo ($this->session->userdata('value_payment_method') == 'Paypal') ? 'checked="checked"':''; ?> value="Paypal" name="payment_method" require>
                                             Paypal</label>
                                         </div>
                                         <?php } ?>
@@ -251,14 +307,17 @@
                             </div>
                             <!-- Payment Method End -->
 
-                            <div class="panel panel-default">
+
+                            <?php if( count($sold_out_status) > 0){ ?>
+
+                                <div class="panel panel-default">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Item Sold Out <i class="fa fa-caret-down"></i></a></h4>
+                                    <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Items Sold Out <i class="fa fa-caret-down"></i></a></h4>
                                 </div>
                                 <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
                                         <div  class="items-message col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                                 
-                                            <div class="alert alert-warning">This Items has bougth by another user
+                                            <div class="alert alert-warning">This Items has bought by another user
                                             <button type="button" class="close" data-dismiss="alert">×</button></div>
                                         
                                         </div>
@@ -269,7 +328,7 @@
                                              <div class="wrap cf">
                                                 <div class="cart">
                                                     <ul class="cartWrap">
-                                                        <?php foreach ($products['data_single'] as $key => $value) { 
+                                                        <?php foreach ($products as $key => $value) { 
 
                                                             if($value['sales_status']=="sold_out"){?>
 
@@ -300,6 +359,9 @@
                                 </div>
                             </div>
 
+                            <?php } ?>
+                            
+
                             <!-- Confirm Order Start -->
                             <div class="panel panel-default">
                                 <div class="panel-heading">
@@ -311,7 +373,7 @@
                                         <div class="wrap cf">
                                           <div class="cart">
 
-                                           <?php if(!empty($products['data_single'])){
+                                           <?php if(!empty($products)){
 
 
 
@@ -332,7 +394,7 @@
 
                                            <?php 
 
-                                           foreach($products['data_single'] as $index => $value){
+                                           foreach($products as $index => $value){
 
                                              if($value['sales_status'] ==='available') {
 
@@ -385,22 +447,7 @@
                                         
                                         
                                                             <?php }
-                                                            // if(!empty($products['data_option'])){
-
-                                                            //     foreach($products['data_option'] as $key => $row){
-
-                                                            //         echo '<div class="optItems">';
-                                                            //         if($value['product_id'] == $row['product_id']){
-
-                                                            //             echo '<p>'.ucfirst($row['option_name']).' : '.$row['option_detil_name'].'  <strong>$'.number_format($row['price_option_value'], 2, '.', '').'</strong></p>';
-
-                                                            //         }
-
-                                                            //         echo '</div>';
-
-                                                            //     }
-
-                                                            // }
+                                                          
                                                             ?>
                                                         </div>
                                                     </div>
@@ -473,8 +520,12 @@
                         </div>
 
                     </div>
+                            
+                     <?php   } ?>
 
-                    <!-- <?php if(!empty($products['data_single'])){
+                  
+
+                    <!-- <?php if(!empty($products)){
 
                         $total_single   = 0;
                         $total_opton    = 0;
@@ -495,7 +546,7 @@
 
                         echo '<tbody>';
 
-                        foreach($products['data_single'] as $index => $value){
+                        foreach($products as $index => $value){
 
                             if (!empty($value['special'])) {
                                 $now = strtotime(date('Y-m-d'));

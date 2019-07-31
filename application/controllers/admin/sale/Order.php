@@ -1976,14 +1976,14 @@ class Order extends CI_Controller
                 'order_id' => $order_id
             ));
 
-            $order_option = 
+            $order_option = json_decode($order[0]['option']);
 
 
       
             $email = $order[0]['email'];
             $total = $total[0]['value'];
 
-            $this->_sendMail($email, $title, $data_email, $products, $total, $order_history);
+            $this->_sendMail($email, $title, $data_email, $products, $total, $order_history,$order_option );
         }
 
         header('Content-Type: application/json');
@@ -2613,7 +2613,7 @@ class Order extends CI_Controller
         redirect('admin/sale/order');
     }
 
-    private function _sendMail($seg1 = '', $seg2 = '', $seg3 = '', $seg4 = '', $seg5 = '', $seg6 = '')
+    private function _sendMail($seg1 = '', $seg2 = '', $seg3 = '', $seg4 = '', $seg5 = '', $seg6 = '',$seg7='')
     {
         $email = $seg1;
         $title = $seg2;
@@ -2621,6 +2621,7 @@ class Order extends CI_Controller
         $data_cart = $seg4;
         $total = $seg5;
         $order_history = $seg6;
+        $order_option = $seg7;
 
 
         //recipients
@@ -2631,6 +2632,8 @@ class Order extends CI_Controller
 
         // message
         $data = array();
+
+        $data['order_option'] = $order_option;
         $data['title'] = $title;
         $data['store_url'] = base_url();
         $data['store_name'] = 'Joscelyn Opal';
@@ -2656,6 +2659,9 @@ class Order extends CI_Controller
 
         $data['order_history'] = $order_history;
 
+
+       
+
         $message = $this
             ->load
             ->view('admin/email/order_history', $data, true);
@@ -2677,6 +2683,7 @@ class Order extends CI_Controller
         $this->email->message($message);
         $this->email->send();
 
+        exit;
     }
 }
 

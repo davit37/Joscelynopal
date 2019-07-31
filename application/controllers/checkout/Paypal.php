@@ -523,9 +523,6 @@ class Paypal extends CI_Controller {
 
 		  // Check if Products have item or not'
 
-		echo"<pre>";
-		print_r($data['products']);
-		echo"</pre>";
 
         if(!$data['products']) {  // if product empty
 

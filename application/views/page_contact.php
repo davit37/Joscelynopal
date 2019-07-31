@@ -21,9 +21,7 @@
                     $this->session->unset_userdata('contact_success');
                 }
                 ?>
-                <?php echo 'Ini angkanya : ';
-                echo mt_rand(1, 10);
-                ?>
+            
                 <form class="form-horizontal" method="post" action="<?php echo base_url('contact/notify') ?>">
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">Name <span class="required">*</span></label>

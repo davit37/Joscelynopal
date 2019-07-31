@@ -21,6 +21,19 @@ class Process extends CI_Controller
         //Load Library
         $this->load->helper('url'); 
         $this->load->library('session');
+
+        $this->load->library('email');
+        
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'mail.app-show.net';
+        $config['smtp_port'] = '465';
+        $config['smtp_user'] = "herman@app-show.net";
+        $config['smtp_pass'] = "D9w3iuKa02";
+        $config['smtp_crypto'] ="ssl";
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = TRUE;
+        $config['mailtype'] = 'html';
+        $this->email->initialize($config);
     
 
         //
@@ -470,10 +483,16 @@ class Process extends CI_Controller
                 $quantity[] = $row['quantity'];
 
             }
+
+            $sold_out_status=array_filter($products['data_single'], function($val,$key){
+          
+               return $val['sales_status'] == "sold_out";
+            },ARRAY_FILTER_USE_BOTH);
         
 
-            $data['products'] = $products;
+            $data['products'] = $products['data_single'];
             $data['quantity'] = $quantity;
+            $data['sold_out_status'] = $sold_out_status;
         }
         else
         {
@@ -482,13 +501,7 @@ class Process extends CI_Controller
             redirect('home');                       
         }
 
-        //update cart from table customer
-
-            // echo "<pre>";
-            // print_r($new_json);
-            // echo"</pre>";
-            // exit;
-
+       
         if($reset_cart){
             $data_update=array(
                 'cart'=>json_encode($new_json),
@@ -551,6 +564,8 @@ class Process extends CI_Controller
             ->get_menu_bottom();
 
         //View
+
+        
         $data['load_view'] = 'catalog/checkout/process';
         $this
             ->load
@@ -1252,7 +1267,7 @@ class Process extends CI_Controller
             'payment_comment' => $payment_comment,
             'shipping_comment' => $shipping_comment,
             'shipping_address' => $company . '<br>' . $address_1 . '<br>' . $address_2 . '<br>' . $city . ' ' . $postcode . '<br>' . $zone_name[0]['name'] . '<br>' . $country_name[0]['name'],
-            'total_amount' => $total_amount,
+          
             'shipping_country_name' => $shipping_country_name,
             'shipping_price' => $shipping_amount,
             'total_amount' => $total_with_shipping
@@ -1273,12 +1288,6 @@ class Process extends CI_Controller
         {
 
             redirect('checkout/paypal');
-
-        }
-        else
-        {
-
-            redirect('checkout/success');
 
         }
 
@@ -1339,7 +1348,19 @@ class Process extends CI_Controller
         $headers .= 'From: Joscelynopal <store@joscelynopal.com>' . "\r\n";
 
         // Mail it
-        mail($to, $subject, $message, $headers);
+        
+        $this->email->from('store@joscelynopal.com', 'Joscelynopal');
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+        
+
+         $this->email->send();
+            
+  
+        
+
+        
     }
 
     private static function delete_asso_arr($arr=[],$key_indicator, $val_indicator ){
