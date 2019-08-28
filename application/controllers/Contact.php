@@ -191,10 +191,7 @@ class Contact extends CI_Controller {
 
         $data['result_page'] = $this->Model_crud->select_where('page',array('slug' => $this->uri->segment(1)));
 
-        echo "<pre>";
-        print_r($data);
-        echo"</pre>";
-        exit;
+  
 
 
         //View

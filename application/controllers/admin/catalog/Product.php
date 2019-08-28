@@ -215,9 +215,6 @@ class Product extends CI_Controller {
 
         $config['last_link'] = '&gt;|';
 
-        
-
-
 
         $page = ($this->uri->segment(5)) ? $this->uri->segment(5) : 1;
 
@@ -279,19 +276,23 @@ class Product extends CI_Controller {
 
         $data = $this->data;
 
-
-
         //Category Product
 
         $data['category'] = $this->Model_crud->select_order('category', 'name', 'asc');
 
-        
+        $p_option = $this->Model_crud->select('p_option');
+        $html = '';
+        $is_selected='';
+
+        foreach($p_option as  $value){
+            $html .= '<option value="'.$value['id'].'">'.$value['option_name'].'</option>';
+        }
+
+        $data['option_list'] = $html;
 
         //Option
 
         $data['option'] = $this->Model_crud->select('option');
-        
-
 
         $data['load_view'] = 'admin/catalog/product/product_add';
 
@@ -646,18 +647,24 @@ class Product extends CI_Controller {
 
         //Data
 
-        $data = $this->data;
-
-        
+        $data = $this->data;       
 
         $product_id = $seg1;
+        $product = $this->Model_crud->select_where('product', array("product_id" => $product_id));
 
         $p_option = $this->Model_crud->select('p_option');
         $html = '';
+        $is_selected='';
 
         foreach($p_option as  $value){
 
-            $html .= '<option value="'.$value['id'].'">'.$value['option_name'].'</option>';
+            if($value['id'] == $product[0]['option_id'] ){
+                $is_selected='selected';
+            }else{
+                $is_selected='';
+            }
+
+            $html .= '<option value="'.$value['id'].'"'.$is_selected.'>'.$value['option_name'].'</option>';
         }
 
         $data['option_list'] = $html;

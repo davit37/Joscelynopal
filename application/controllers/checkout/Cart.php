@@ -143,6 +143,7 @@ class Cart extends CI_Controller {
 
 
         //Cart
+        $json = array();
 
         $data['cart'] = array();
 
@@ -153,40 +154,21 @@ class Cart extends CI_Controller {
             if ($customer[0]['cart']) {
 
                 $data['cart'] = json_decode($customer[0]['cart'], true);
-
-            }
-
-        }
-
-
-
-        //Get Cart if user logon
-
-
-
-        $json = array();
-
-        if ($this->session->userdata('uid')) {
-
-            $customer = $this->Model_crud->select_where('customer', array('customer_id' => $this->session->userdata('uid')));
-
-            if ($customer[0]['cart']) {
-
                 $json = json_decode($customer[0]['cart'], true);
 
             }
 
-        } else {
+        }else {
 
             if ($this->session->userdata('guest_cart')) {
 
-                $json = json_decode($this->session->userdata('guest_cart'), true);
+                $data['cart'] =json_decode($this->session->userdata('guest_cart'), true);     
+
+                $json = json_decode($this->session->userdata('guest_cart'), true);            
 
             }
 
         }
-
-
 
         //Get product from cart
 
@@ -432,12 +414,6 @@ class Cart extends CI_Controller {
 
             }
 
-
-
-            $quantity[] = $row['quantity'];
-
-
-
         }
 
 
@@ -478,10 +454,6 @@ class Cart extends CI_Controller {
     $data['load_view'] = 'catalog/checkout/cart';
 
 
-    // echo "<pre>";
-    // print_r($data['products']);     
-    // echo"</pre>";
-    
 
     $this->load->view('template/frontend', $data);
 

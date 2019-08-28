@@ -63,7 +63,7 @@
                                             </div>
                                             <div class="form-group <?php echo ($this->session->userdata('error_lastname')) ? 'has-error' : ''; ?>">
                                                 <label for="input-payment-lastname" class="control-label"><span class="required">*</span> Last Name</label>
-                                                <input type="text" class="form-control" id="input-payment-lastname" placeholder="Last Name" value="<?php echo ($user) ? $user[0]['lastname'] : $this->session->userdata('value_lastname'); ?>" name="lastname">
+                                                <input type="text" class="form-control" id= "input-payment-lastname" placeholder="Last Name" value="<?php echo ($user) ? $user[0]['lastname'] : $this->session->userdata('value_lastname'); ?>" name="lastname">
                                                 <?php if ($this->session->userdata('error_lastname')) { ?>
                                                 <div class="text-danger"><?php echo $this->session->userdata('error_lastname') ?></div>
                                                 <?php $this->session->unset_userdata('error_lastname') ?>
@@ -250,15 +250,17 @@
                                 </div>
                             </div>
                             <!-- Payment Method End -->
+                            <?php if( asso_count($products['data_single'], 'sales_status', 'sold_out') > 0){?>
 
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Item Sold Out <i class="fa fa-caret-down"></i></a></h4>
                                 </div>
+                              
                                 <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
                                         <div  class="items-message col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                                
-                                            <div class="alert alert-warning">This Items has bougth by another user
+                                            
+                                            <div class="alert alert-warning">This Items have been bougth by another user
                                             <button type="button" class="close" data-dismiss="alert">×</button></div>
                                         
                                         </div>
@@ -299,6 +301,8 @@
                                 
                                 </div>
                             </div>
+                            
+                            <?php } ?>
 
                             <!-- Confirm Order Start -->
                             <div class="panel panel-default">
@@ -312,8 +316,6 @@
                                           <div class="cart">
 
                                            <?php if(!empty($products['data_single'])){
-
-
 
                                             $total_single   = 0;
 
@@ -385,22 +387,7 @@
                                         
                                         
                                                             <?php }
-                                                            // if(!empty($products['data_option'])){
-
-                                                            //     foreach($products['data_option'] as $key => $row){
-
-                                                            //         echo '<div class="optItems">';
-                                                            //         if($value['product_id'] == $row['product_id']){
-
-                                                            //             echo '<p>'.ucfirst($row['option_name']).' : '.$row['option_detil_name'].'  <strong>$'.number_format($row['price_option_value'], 2, '.', '').'</strong></p>';
-
-                                                            //         }
-
-                                                            //         echo '</div>';
-
-                                                            //     }
-
-                                                            // }
+                                                
                                                             ?>
                                                         </div>
                                                     </div>

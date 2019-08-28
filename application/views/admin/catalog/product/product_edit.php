@@ -325,6 +325,7 @@
                                     <div class="col-sm-10">
 
                                         <select name="option_id" id="input-featured" class="form-control">
+                                            <option >-- Select Option --</option>
 
                                             <?php 
                                                echo $option_list;

@@ -148,6 +148,26 @@
                                     </select>
                                 </div>
                             </div>
+
+                            <div class="form-group">
+
+                                <label class="col-sm-2 control-label" for="input-featured">Option</label>
+
+                                <div class="col-sm-10">
+
+                                    <select name="option_id" id="input-featured" class="form-control">
+                                        <option >-- Select Option --</option>
+
+                                        <?php 
+                                        echo $option_list;
+                                        ?>
+
+                                    </select>
+
+                                </div>
+
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="input-sort-order">Sort Order</label>
                                 <div class="col-sm-10">
