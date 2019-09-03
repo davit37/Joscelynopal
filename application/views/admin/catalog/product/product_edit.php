@@ -72,43 +72,41 @@
 
                             <div class="tab-pane active" id="tab-data">
 
-                                <div class="form-group required <?php if ($this->session->userdata('product_error')) echo 'has_error'; ?>">
+                                <div class="form-group required <?php echo form_error('product_name') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-name">Product Name</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="product_name" value="<?php echo $result[0]['name'] ?>" placeholder="Product Name" id="input-name" class="form-control" />
+                                        <input type="text" name="product_name" value="<?= set_value('product_name') != null ? set_value('product_name'): $result[0]['name'] ?>" placeholder="Product Name" id="input-name" class="form-control" />
 
-                                        <?php
-
-                                        if ($this->session->userdata('product_error')) {
-
-                                            echo '<div class="text-danger">Product Name is required!</div>';
-
-                                            $this->session->unset_userdata('product_error');
-
-                                        }
-
-                                        ?>
+                                        <?php if( null != form_error('product_name') ){
+                                            echo '<div class="text-danger">'.form_error('product_name').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('product_description') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-description">Description</label>
 
                                     <div class="col-sm-10">
 
-                                        <textarea name="product_description" placeholder="Description" id="input-description"><?php echo $result[0]['description'] ?></textarea>
+                                        <textarea name="product_description" placeholder="Description" id="input-description"><?= set_value('product_description') != null ? set_value('product_description') : $result[0]['description'] ?></textarea>
+
+                                        <?php if( null != form_error('product_description') ){
+                                            echo '<div class="text-danger">'.form_error('product_description').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('image') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-image">Image</label>
 
@@ -117,143 +115,184 @@
                                         <a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="<?php echo base_url('thumb/' . $result[0]['image']) ?>" alt="" title="" data-placeholder="<?php echo base_url('assets/images/icon/no_image.png') ?>" /></a>
 
                                         <input type="hidden" name="image" value="<?php echo $result[0]['image'] ?>" id="input-image" />
-
+                                        <?php if( null != form_error('image') ){
+                                            echo '<div class="text-danger">'.form_error('image').'</div>';
+                                            
+                                        } ?>
                                     </div>
 
                                 </div>            
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('type') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-type">Type</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="type" value="<?php echo $result[0]['type'] ?>" placeholder="Type" id="input-type" class="form-control" />
+                                        <input type="text" name="type" value="<?= set_value('type') != null ? set_value('type'):  $result[0]['type'] ?>" placeholder="Type" id="input-type" class="form-control" />
+
+                                        <?php if( null != form_error('type') ){
+                                            echo '<div class="text-danger">'.form_error('type').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('item_id') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-item-id">Item ID</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="item_id" value="<?php echo $result[0]['item_id'] ?>" placeholder="Item ID" id="input-item-id" class="form-control" />
+                                        <input type="text" name="item_id" value="<?= set_value('item_id') != null ? set_value('item_id') : $result[0]['item_id'] ?>" placeholder="Item ID" id="input-item-id" class="form-control" />
+                                        
+                                        <?php if( null != form_error('item_id') ){
+                                            echo '<div class="text-danger">'.form_error('item_id').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('content') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-content"><span data-toggle="tooltip" title="in GEM">Content</span></label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="content" value="<?php echo $result[0]['content'] ?>" placeholder="Content" id="input-content" class="form-control" />
+                                        <input type="text" name="content" value="<?= set_value('content') != null ? set_value('content') :  $result[0]['content'] ?>" placeholder="Content" id="input-content" class="form-control" />
+
+                                        <?php if( null != form_error('content') ){
+                                            echo '<div class="text-danger">'.form_error('content').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('weight') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-weight"><span data-toggle="tooltip" title="in CT">Weight</span></label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="weight" value="<?php echo $result[0]['weight'] ?>" placeholder="Weight" id="input-weight" class="form-control" />
+                                        <input type="text" name="weight" value="<?= set_value('wight') != null ? set_value('weight') : $result[0]['weight'] ?>" placeholder="Weight" id="input-weight" class="form-control" />
+
+                                        <?php if( null != form_error('weight') ){
+                                            echo '<div class="text-danger">'.form_error('weight').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('size') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-size"><span data-toggle="tooltip" title="in MM">Size</span></label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="size" value="<?php echo $result[0]['size'] ?>" placeholder="Size" id="input-size" class="form-control" />
+                                        <input type="text" name="size" value="<?= $result[0]['size'] ?>" placeholder="Size" id="input-size" class="form-control" />
+
+                                        <?php if( null != form_error('size') ){
+                                            echo '<div class="text-danger">'.form_error('size').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('shape') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-shape">Shape</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="shape" value="<?php echo $result[0]['shape'] ?>" placeholder="Shape" id="input-shape" class="form-control" />
+                                        <input type="text" name="shape" value="<?= set_value('shape') != null ? set_value('shape') : $result[0]['shape'] ?>" placeholder="Shape" id="input-shape" class="form-control" />
+
+                                        <?php if( null != form_error('shape') ){
+                                            echo '<div class="text-danger">'.form_error('shape').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('clarity') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-clarity">Clarity</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="clarity" value="<?php echo $result[0]['clarity'] ?>" placeholder="Clarity" id="input-clarity" class="form-control" />
+                                        <input type="text" name="clarity" value="<?= set_value('clarity') != null ? set_value('clarity') : $result[0]['clarity'] ?>" placeholder="Clarity" id="input-clarity" class="form-control" />
+
+                                        <?php if( null != form_error('clarity') ){
+                                            echo '<div class="text-danger">'.form_error('clarity').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('treatment') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-treatment">Treatment</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="treatment" value="<?php echo $result[0]['treatment'] ?>" placeholder="Treatment" id="input-treatment" class="form-control" />
+                                        <input type="text" name="treatment" value="<?= set_value('treatment') != null ? set_value('treatment') :  $result[0]['treatment'] ?>" placeholder="Treatment" id="input-treatment" class="form-control" />
+
+                                        <?php if( null != form_error('treatment') ){
+                                            echo '<div class="text-danger">'.form_error('treatment').'</div>';
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('origin') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-origin">Origin</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="origin" value="<?php echo $result[0]['origin'] ?>" placeholder="Origin" id="input-origin" class="form-control" />
+                                        <input type="text" name="origin" value="<?= set_value('origin') != null ? set_value('origin') :  $result[0]['origin'] ?>" placeholder="Origin" id="input-origin" class="form-control" />
+
+                                        <?php if( null != form_error('origin') ){
+                                            echo '<div class="text-danger">'.form_error('origin').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('price') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-price">Price</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="price" value="<?php echo number_format($result[0]['price'], 2, '.', '') ?>" placeholder="Price" id="input-price" class="form-control" />
+                                        <input type="text" name="price" value="<?= set_value('clarity') != null ? number_format(set_value('price'), 2, '.', '') :  number_format($result[0]['price'], 2, '.', '') ?>" placeholder="Price" id="input-price" class="form-control" />
+
+                                        <?php if( null != form_error('price') ){
+                                            echo '<div class="text-danger">'.form_error('price').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <!-- <div class="form-group">
-
-                                    <label class="col-sm-2 control-label" for="input-quantity">Quantity</label>
-
-                                    <div class="col-sm-10">
-
-                                        <input type="text" name="quantity" value="<?php echo $result[0]['quantity'] ?>" placeholder="Quantity" id="input-quantity" class="form-control" />
-
-                                    </div>
-
-                                </div> -->
-
+                            
                                 <div class="form-group">
 
                                     <label class="col-sm-2 control-label" for="input-stock"><span data-toggle="tooltip" title="Status shown when a product is out of stock">Out Of Stock Status</span></label>
@@ -337,19 +376,24 @@
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('sort_order') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-sort-order">Sort Order</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="sort_order" value="<?php echo $result[0]['sort_order'] ?>" placeholder="Sort Order" id="input-sort-order" class="form-control" />
+                                        <input type="text" name="sort_order" value="<?= set_value('sort_order') != null ? set_value('sort_order') :  $result[0]['sort_order'] ?>" placeholder="Sort Order" id="input-sort-order" class="form-control" />
+
+                                        <?php if( null != form_error('sort_order') ){
+                                            echo '<div class="text-danger">'.form_error('sort_order').'</div>';
+                                            
+                                        } ?>
 
                                     </div>
 
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group required <?php echo form_error('status') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-status">Status</label>
 
@@ -367,13 +411,13 @@
 
                                 </div>
 
-                                <div class="form-group <?php if ($this->session->userdata('slug_error')) echo 'has_error'; ?>">
+                                <div class="form-group required <?php echo form_error('slug') != null ? 'has-error' :'' ?>">
 
                                     <label class="col-sm-2 control-label" for="input-slug">Slug</label>
 
                                     <div class="col-sm-10">
 
-                                        <input type="text" name="slug" value="<?php echo $result[0]['slug'] ?>" placeholder="Slug" id="input-slug" class="form-control" />
+                                        <input type="text" name="slug" value="<?= set_value('slug') != null ? set_value('slug') :  $result[0]['slug'] ?>" placeholder="Slug" id="input-slug" class="form-control" />
 
                                         <?php
 

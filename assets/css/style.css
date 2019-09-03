@@ -1514,7 +1514,7 @@ a {
 
     width:550px;  /* adjust as per your needs */
 
-    height:550px;   /* adjust as per your needs */
+    height:569px;   /* adjust as per your needs */
 
     margin-left:-275px;   /* negative half of width above */
 
@@ -1522,7 +1522,7 @@ a {
 
     background: #fff;
 
-    border: 10px solid #000;
+    border: 4px solid #e0e0e0;
 
 }
 

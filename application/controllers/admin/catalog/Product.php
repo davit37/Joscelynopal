@@ -29,6 +29,8 @@ class Product extends CI_Controller {
         //load Model
 
         $this->load->model('Model_crud');
+        $this->load->library('form_validation');
+
 
         $this->load->library('pagination');
 
@@ -296,7 +298,7 @@ class Product extends CI_Controller {
 
         $data['load_view'] = 'admin/catalog/product/product_add';
 
-        $this->load->view('admin/template/backend', $data);
+        $this->load->view('admin/template/backend', $data) ;
 
     }
 
@@ -305,336 +307,361 @@ class Product extends CI_Controller {
     public function save() {
 
         //Data
-
-        $data = $this->data;
-
-
-
-        $name = $this->input->post('product_name');
-
-        $description = $this->input->post('product_description');
-
-        $image = $this->input->post('image');
-
-        $type = $this->input->post('type');
-
-        $item_id = $this->input->post('item_id');
-
-        $content = $this->input->post('content');
-
-        $weight = $this->input->post('weight');
-
-        $size = $this->input->post('size');
-
-        $shape = $this->input->post('shape');
-
-        $clarity = $this->input->post('clarity');
-
-        $treatment = $this->input->post('treatment');
-
-        $origin = $this->input->post('origin');
-
-        $price = $this->input->post('price');
-
-        $quantity = $this->input->post('quantity');
-
-        $stock = $this->input->post('stock');
-
-        $category_id = $this->input->post('category_id');
-
-        $featured = $this->input->post('featured');
-
-        $sort_order = $this->input->post('sort_order');
-
-        $status = $this->input->post('status');
-
-        $slug = $this->input->post('slug');
-
+        $this->form_validation->set_rules('product_name', 'product_name', 'required');
+        $this->form_validation->set_rules('product_description', 'product_description', 'required');
+        $this->form_validation->set_rules('image', 'image', 'required');
+        $this->form_validation->set_rules('type', 'type', 'required');
+        $this->form_validation->set_rules('item_id', 'item_id', 'required');
+        $this->form_validation->set_rules('content', 'content', 'required');
+        $this->form_validation->set_rules('weight', 'weight', 'required');
+        $this->form_validation->set_rules('size', 'size', 'required');
+        $this->form_validation->set_rules('shape', 'shape', 'required');
+        $this->form_validation->set_rules('shape', 'shape', 'required');
+        $this->form_validation->set_rules('clarity', 'clarity', 'required');
+        $this->form_validation->set_rules('stock', 'Stock','required');
+        $this->form_validation->set_rules('category_id','category_id','required');
+        $this->form_validation->set_rules('treatment','treatment','required');
+        $this->form_validation->set_rules('origin','origin','required');
+        $this->form_validation->set_rules('price','price','required');
         
-
-        $option_type = $this->input->post('option_type');
-
-        $option_name = $this->input->post('option_name');
-
-        $option_required = $this->input->post('option_required');
-
-        
-
-        $opt_value = $this->input->post('opt_value');
-
-        $opt_price = $this->input->post('opt_price');
-
-        $opt_weight = $this->input->post('opt_weight');
-
-
-
-        if (empty($name)) {
-
-            $this->session->set_userdata('product_error', TRUE);
-
-            redirect('admin/catalog/product/add');
-
-        }
-
-        if (empty($slug)) {
-
-            $slug = url_title($name, 'dash', TRUE);
-
-        }
-
-        $check_duplicate = $this->Model_crud->check_duplicate('product', array("slug" => $slug));
-
-        if ($check_duplicate) {
-
-            $this->session->set_userdata('slug_error', TRUE);
-
-            redirect('admin/catalog/product/add');
-
-        }
-
-
-
-        $data_insert = array(
-
-            "name" => $name,
-
-            "description" => $description,
-
-            "image" => $image,
-
-            "type" => $type,
-
-            "item_id" => $item_id,
-
-            "content" => $content,
-
-            "weight" => $weight,
-
-            "size" => $size,
-
-            "shape" => $shape,
-
-            "clarity" => $clarity,
-
-            "treatment" => $treatment,
-
-            "origin" => $origin,
-
-            "price" => $price,
-
-            "quantity" => $quantity,
-
-            "stock" => $stock,
-
-            "category_id" => $category_id,
-
-            "featured" => $featured,
-
-            "sort_order" => $sort_order,
-
-            "status" => $status,
-
-            "slug" => $slug,
-
-            "date_added" => date("c")
-
-            );
-
-        
-
-        //Insert Data Product
-
-        $ex_ins = $this->Model_crud->insert('product', $data_insert);
-
-        $product_id = $this->Model_crud->inserted_id();
-
-
-
-        //Insert Data Product Image
-
-        $product_image = $this->input->post('product_image');
-
-        $product_image_sort_order = $this->input->post('product_image_sort_order');
-
-        for ($i = 0; $i < count($product_image); $i++) {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "image" => $product_image[$i],
-
-                "sort_order" => $product_image_sort_order[$i]
-
-                );
-
-            $ex_ins = $this->Model_crud->insert('product_image', $data_insert);
-
-        }
-
-
-
-        //Insert Data Product Video
-
-        $mp4 = $this->input->post('product_video_mp4');
-
-        $webm = $this->input->post('product_video_webm');
-
-        $ogv = $this->input->post('product_video_ogv');
-
-
-
-        if ($mp4 != '') {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "video" => $mp4,
-
-                "type" => 'mp4'
-
-                );
-
-            $ex_ins = $this->Model_crud->insert('product_video', $data_insert);
-
-        }
-
-        if ($webm != '') {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "video" => $webm,
-
-                "type" => 'webm'
-
-                );
-
-            $ex_ins = $this->Model_crud->insert('product_video', $data_insert);
-
-        }
-
-        if ($ogv != '') {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "video" => $ogv,
-
-                "type" => 'ogv'
-
-                );
-
-            $ex_ins = $this->Model_crud->insert('product_video', $data_insert);
-
-        }
-
-        
-
-        //Insert Data Product Option
-
-        if($option_type) {
-
-
-
-            for ($i = 0; $i < count($option_type); $i++) {
-
-                $data_option = array(
-
-                    "product_id" => $product_id,
-
-                    "option_id" => $option_type[$i],
-
-                    "value" => $option_name[$i],
-
-                    "required" => $option_required[$i]
-
-                    );
-
-                $ex_ins = $this->Model_crud->insert('product_option', $data_option);
-
-                $product_option_id = $this->Model_crud->inserted_id();
-
-                
-
-                for($j = 0; $j < count($opt_value[$i]); $j++) {
-
-                    $data_option_value = array(
-
-                        "product_option_id" => $product_option_id,
-
-                        "product_id" => $product_id,
-
-                        "option_id" => $option_type[$i],
-
-                        "value" => $opt_value[$i][$j],
-
-                        "price" => $opt_price[$i][$j],
-
-                        "weight" => $opt_weight[$i][$j]
-
-                        );
-
-                    $ex_ins = $this->Model_crud->insert('product_option_value', $data_option_value);
-
-                }
-
-                
-
+        $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+
+        if ($this->form_validation->run() == FALSE)
+        {
+           $this->add();
+           
+        }else{
+
+            $name = $this->input->post('product_name');
+
+            $description = $this->input->post('product_description');
+    
+            $image = $this->input->post('image');
+    
+            $type = $this->input->post('type');
+    
+            $item_id = $this->input->post('item_id');
+    
+            $content = $this->input->post('content');
+    
+            $weight = $this->input->post('weight');
+    
+            $size = $this->input->post('size');
+    
+            $shape = $this->input->post('shape');
+    
+            $clarity = $this->input->post('clarity');
+    
+            $treatment = $this->input->post('treatment');
+    
+            $origin = $this->input->post('origin');
+    
+            $price = $this->input->post('price');
+    
+            $quantity = $this->input->post('quantity');
+    
+            $stock = $this->input->post('stock');
+    
+            $category_id = $this->input->post('category_id');
+    
+            $featured = $this->input->post('featured');
+    
+            $sort_order = $this->input->post('sort_order');
+    
+            $status = $this->input->post('status');
+    
+            $slug = $this->input->post('slug');
+    
+            $option_type = $this->input->post('option_type');
+    
+            $option_name = $this->input->post('option_name');
+    
+            $option_required = $this->input->post('option_required');
+    
+            $opt_value = $this->input->post('opt_value');
+    
+            $opt_price = $this->input->post('opt_price');
+    
+            $opt_weight = $this->input->post('opt_weight');
+    
+            $option_id  = $this->input->post('option_id');
+    
+    
+    
+            if (empty($name)) {
+    
+                $this->session->set_userdata('product_error', TRUE);
+    
+                redirect('admin/catalog/product/add');
+    
             }
-
-            
-
-        }
-
-
-
-        //Insert Data Product Special
-
-        $product_special_price = $this->input->post('product_special_price');
-
-        $product_special_date_start = $this->input->post('product_special_date_start');
-
-        $product_special_date_end = $this->input->post('product_special_date_end');
-
-        if ($product_special_price != '' && $product_special_date_start != '' && $product_special_date_end != '') {
-
+    
+            if (empty($slug)) {
+    
+                $slug = url_title($name, 'dash', TRUE);
+    
+            }
+    
+            $check_duplicate = $this->Model_crud->check_duplicate('product', array("slug" => $slug));
+    
+            if ($check_duplicate) {
+    
+                $this->session->set_userdata('slug_error', TRUE);
+    
+                redirect('admin/catalog/product/add');
+    
+            }
+    
+    
+    
             $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "price" => $product_special_price,
-
-                "date_start" => $product_special_date_start,
-
-                "date_end" => $product_special_date_end
-
+    
+                "name" => $name,
+    
+                "description" => $description,
+    
+                "image" => $image,
+    
+                "type" => $type,
+    
+                "item_id" => $item_id,
+    
+                "content" => $content,
+    
+                "weight" => $weight,
+    
+                "size" => $size,
+    
+                "shape" => $shape,
+    
+                "clarity" => $clarity,
+    
+                "treatment" => $treatment,
+    
+                "origin" => $origin,
+    
+                "price" => $price,
+    
+                "quantity" => $quantity,
+    
+                "stock" => $stock,
+    
+                "category_id" => $category_id,
+    
+                "featured" => $featured,
+    
+                "sort_order" => $sort_order,
+    
+                "status" => $status,
+    
+                "slug" => $slug,
+    
+                "date_added" => date("c"),
+    
+                'option_id'=>$option_id
+    
+    
+    
                 );
-
-            $ex_ins = $this->Model_crud->insert('product_special', $data_insert);
-
+    
+            
+    
+            //Insert Data Product
+    
+            $ex_ins = $this->Model_crud->insert('product', $data_insert);
+    
+            $product_id = $this->Model_crud->inserted_id();
+    
+    
+    
+            //Insert Data Product Image
+    
+            $product_image = $this->input->post('product_image');
+    
+            $product_image_sort_order = $this->input->post('product_image_sort_order');
+    
+            for ($i = 0; $i < count($product_image); $i++) {
+    
+                $data_insert = array(
+    
+                    "product_id" => $product_id,
+    
+                    "image" => $product_image[$i],
+    
+                    "sort_order" => $product_image_sort_order[$i]
+    
+                    );
+    
+                $ex_ins = $this->Model_crud->insert('product_image', $data_insert);
+    
+            }
+    
+    
+    
+            //Insert Data Product Video
+    
+            $mp4 = $this->input->post('product_video_mp4');
+    
+            $webm = $this->input->post('product_video_webm');
+    
+            $ogv = $this->input->post('product_video_ogv');
+    
+    
+    
+            if ($mp4 != '') {
+    
+                $data_insert = array(
+    
+                    "product_id" => $product_id,
+    
+                    "video" => $mp4,
+    
+                    "type" => 'mp4'
+    
+                    );
+    
+                $ex_ins = $this->Model_crud->insert('product_video', $data_insert);
+    
+            }
+    
+            if ($webm != '') {
+    
+                $data_insert = array(
+    
+                    "product_id" => $product_id,
+    
+                    "video" => $webm,
+    
+                    "type" => 'webm'
+    
+                    );
+    
+                $ex_ins = $this->Model_crud->insert('product_video', $data_insert);
+    
+            }
+    
+            if ($ogv != '') {
+    
+                $data_insert = array(
+    
+                    "product_id" => $product_id,
+    
+                    "video" => $ogv,
+    
+                    "type" => 'ogv'
+    
+                    );
+    
+                $ex_ins = $this->Model_crud->insert('product_video', $data_insert);
+    
+            }
+    
+            
+    
+            //Insert Data Product Option
+    
+            if($option_type) {
+    
+    
+    
+                for ($i = 0; $i < count($option_type); $i++) {
+    
+                    $data_option = array(
+    
+                        "product_id" => $product_id,
+    
+                        "option_id" => $option_type[$i],
+    
+                        "value" => $option_name[$i],
+    
+                        "required" => $option_required[$i]
+    
+                        );
+    
+                    $ex_ins = $this->Model_crud->insert('product_option', $data_option);
+    
+                    $product_option_id = $this->Model_crud->inserted_id();
+    
+                    
+    
+                    for($j = 0; $j < count($opt_value[$i]); $j++) {
+    
+                        $data_option_value = array(
+    
+                            "product_option_id" => $product_option_id,
+    
+                            "product_id" => $product_id,
+    
+                            "option_id" => $option_type[$i],
+    
+                            "value" => $opt_value[$i][$j],
+    
+                            "price" => $opt_price[$i][$j],
+    
+                            "weight" => $opt_weight[$i][$j]
+    
+                            );
+    
+                        $ex_ins = $this->Model_crud->insert('product_option_value', $data_option_value);
+    
+                    }
+    
+                    
+    
+                }
+    
+                
+    
+            }
+    
+    
+    
+            //Insert Data Product Special
+    
+            $product_special_price = $this->input->post('product_special_price');
+    
+            $product_special_date_start = $this->input->post('product_special_date_start');
+    
+            $product_special_date_end = $this->input->post('product_special_date_end');
+    
+            if ($product_special_price != '' && $product_special_date_start != '' && $product_special_date_end != '') {
+    
+                $data_insert = array(
+    
+                    "product_id" => $product_id,
+    
+                    "price" => $product_special_price,
+    
+                    "date_start" => $product_special_date_start,
+    
+                    "date_end" => $product_special_date_end
+    
+                    );
+    
+                $ex_ins = $this->Model_crud->insert('product_special', $data_insert);
+    
+            }
+    
+    
+    
+            //notification
+    
+            if ($ex_ins) {
+    
+                $this->session->set_userdata('product_success', TRUE);
+    
+            } else {
+    
+                $this->session->set_userdata('product_error', TRUE);
+    
+            }
+    
+    
+    
+            redirect('admin/catalog/product');
         }
+        
 
-
-
-        //notification
-
-        if ($ex_ins) {
-
-            $this->session->set_userdata('product_success', TRUE);
-
-        } else {
-
-            $this->session->set_userdata('product_error', TRUE);
-
-        }
-
-
-
-        redirect('admin/catalog/product');
 
     }
 
@@ -729,365 +756,347 @@ class Product extends CI_Controller {
 
         //Data
 
-        $data = $this->data;
+         //Data
+         $this->form_validation->set_rules('product_name', 'product_name', 'required');
+         $this->form_validation->set_rules('product_description', 'product_description', 'required');
+         $this->form_validation->set_rules('image', 'image', 'required');
+         $this->form_validation->set_rules('type', 'type', 'required');
+         $this->form_validation->set_rules('item_id', 'item_id', 'required');
+         $this->form_validation->set_rules('content', 'content', 'required');
+         $this->form_validation->set_rules('weight', 'weight', 'required');
+         $this->form_validation->set_rules('size', 'size', 'required');
+         $this->form_validation->set_rules('shape', 'shape', 'required');
+         $this->form_validation->set_rules('shape', 'shape', 'required');
+         $this->form_validation->set_rules('clarity', 'clarity', 'required');
+         $this->form_validation->set_rules('stock', 'Stock','required');
+         $this->form_validation->set_rules('category_id','category_id','required');
+         $this->form_validation->set_rules('treatment','treatment','required');
+         $this->form_validation->set_rules('origin','origin','required');
+         $this->form_validation->set_rules('price','price','required');
+         
+         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
+ 
+         if ($this->form_validation->run() == FALSE)
+         {
+            $this->edit($this->input->post('product_id'));
+            
+         }else{
+
+            $data = $this->data;
+
+            $product_id = $this->input->post('product_id');
+
+            $name = $this->input->post('product_name');
+
+            $description = $this->input->post('product_description');
+
+            $image = $this->input->post('image');
+
+            $type = $this->input->post('type');
+
+            $item_id = $this->input->post('item_id');
+
+            $content = $this->input->post('content');
+
+            $weight = $this->input->post('weight');
+
+            $size = $this->input->post('size');
+
+            $shape = $this->input->post('shape');
+
+            $clarity = $this->input->post('clarity');
+
+            $treatment = $this->input->post('treatment');
+
+            $origin = $this->input->post('origin');
+
+            $price = $this->input->post('price');
+
+            $quantity = $this->input->post('quantity');
+
+            $stock = $this->input->post('stock');
+
+            $category_id = $this->input->post('category_id');
+
+            $featured = $this->input->post('featured');
+
+            $sort_order = $this->input->post('sort_order');
+
+            $status = $this->input->post('status');
+
+            $slug = $this->input->post('slug');
+
+            $prev_slug = $this->input->post('prev_slug');
+
+            
+            $product_option_id = $this->input->post('product_option_id');
+
+            $option_type = $this->input->post('option_type');
+
+            $option_name = $this->input->post('option_name');
+
+            $option_required = $this->input->post('option_required');
+
+            
+            $opt_value_id = $this->input->post('opt_value_id');
+
+            $opt_value = $this->input->post('opt_value');
+
+            $opt_price = $this->input->post('opt_price');
+
+            $opt_weight = $this->input->post('opt_weight');
+            $option_id  = $this->input->post('option_id');
 
 
 
+            if (empty($name)) {
 
-        $product_id = $this->input->post('product_id');
-
-        $name = $this->input->post('product_name');
-
-        $description = $this->input->post('product_description');
-
-        $image = $this->input->post('image');
-
-        $type = $this->input->post('type');
-
-        $item_id = $this->input->post('item_id');
-
-        $content = $this->input->post('content');
-
-        $weight = $this->input->post('weight');
-
-        $size = $this->input->post('size');
-
-        $shape = $this->input->post('shape');
-
-        $clarity = $this->input->post('clarity');
-
-        $treatment = $this->input->post('treatment');
-
-        $origin = $this->input->post('origin');
-
-        $price = $this->input->post('price');
-
-        $quantity = $this->input->post('quantity');
-
-        $stock = $this->input->post('stock');
-
-        $category_id = $this->input->post('category_id');
-
-        $featured = $this->input->post('featured');
-
-        $sort_order = $this->input->post('sort_order');
-
-        $status = $this->input->post('status');
-
-        $slug = $this->input->post('slug');
-
-        $prev_slug = $this->input->post('prev_slug');
-
-        
-        $product_option_id = $this->input->post('product_option_id');
-
-        $option_type = $this->input->post('option_type');
-
-        $option_name = $this->input->post('option_name');
-
-        $option_required = $this->input->post('option_required');
-
-        
-        $opt_value_id = $this->input->post('opt_value_id');
-
-        $opt_value = $this->input->post('opt_value');
-
-        $opt_price = $this->input->post('opt_price');
-
-        $opt_weight = $this->input->post('opt_weight');
-        $option_id  = $this->input->post('option_id');
-
-
-
-        /*echo '<pre>';
-        print_r($_POST);
-        echo '</pre>';*/
-
-        /*if($opt_value_id){
-
-            $option_value_id = array();
-            foreach($opt_value_id as $index => $value){
-
-                if(is_array($value)){
-                    foreach($value as $key => $row){
-                        if(empty($row)){
-
-               $data_option_value = array(
-
-                        "product_option_id" => $product_option_id,
-
-                        "product_id" => $product_id,
-
-                        "option_id" => $option_type[$index][$key],
-
-                        "value" => $opt_value[$index][$key],
-
-                        "price" => $opt_price[$index][$key],
-
-                        "weight" => $opt_weight[$index][$key]
-
-                    );
-
-                    $ex_ins = $this->Model_crud->insert('product_option_value', $data_option_value);
-
-                            echo $index;
-                            echo '<br>';
-                            echo $key;  
-                        }
-                    }
-                }
-            }
-        }*/
-
-        //die();
-
-        if (empty($name)) {
-
-            $this->session->set_userdata('product_error', TRUE);
-
-            redirect('admin/catalog/product/edit/' . $product_id);
-
-        }
-
-        if ($prev_slug != $slug) {
-
-            if (empty($slug)) {
-
-                $slug = url_title($name, 'dash', TRUE);
-
-            }
-
-            $check_duplicate = $this->Model_crud->check_duplicate('product', array("slug" => $slug));
-
-            if ($check_duplicate) {
-
-                $this->session->set_userdata('slug_error', TRUE);
+                $this->session->set_userdata('product_error', TRUE);
 
                 redirect('admin/catalog/product/edit/' . $product_id);
 
             }
 
-        }
+            if ($prev_slug != $slug) {
 
+                if (empty($slug)) {
 
+                    $slug = url_title($name, 'dash', TRUE);
 
-        $data_update = array(
+                }
 
-            "name" => $name,
+                $check_duplicate = $this->Model_crud->check_duplicate('product', array("slug" => $slug));
 
-            "description" => $description,
+                if ($check_duplicate) {
 
-            "image" => $image,
+                    $this->session->set_userdata('slug_error', TRUE);
 
-            "type" => $type,
+                    redirect('admin/catalog/product/edit/' . $product_id);
 
-            "item_id" => $item_id,
+                }
 
-            "content" => $content,
-
-            "weight" => $weight,
-
-            "size" => $size,
-
-            "shape" => $shape,
-
-            "clarity" => $clarity,
-
-            "treatment" => $treatment,
-
-            "origin" => $origin,
-
-            "price" => $price,
-
-            "quantity" => $quantity,
-
-            "stock" => $stock,
-
-            "category_id" => $category_id,
-
-            "featured" => $featured,
-
-            "sort_order" => $sort_order,
-
-            "status" => $status,
-
-            "slug" => $slug,
-
-            "date_modified" => date("c"),
-
-            'option_id' => $option_id
-
-            );
-
-
-
-        //Update Data Product
-
-        $ex_upd = $this->Model_crud->update('product', $data_update, array("product_id" => $product_id));
-
-
-
-        //Update Data Product Image
-
-        //Delete old data first
-
-        $ex_upd = $this->Model_crud->delete('product_image', array("product_id" => $product_id));
-
-        $product_image = $this->input->post('product_image');
-
-        $product_image_sort_order = $this->input->post('product_image_sort_order');
-
-        for ($i = 0; $i < count($product_image); $i++) {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "image" => $product_image[$i],
-
-                "sort_order" => $product_image_sort_order[$i]
-
-                );
-
-            $ex_upd = $this->Model_crud->insert('product_image', $data_insert);
-
-        }
-
-
-
-        //Update Data Product Video
-
-        //Delete old data first
-
-        $ex_upd = $this->Model_crud->delete('product_video', array("product_id" => $product_id));
-
-        $mp4 = $this->input->post('product_video_mp4');
-
-        $webm = $this->input->post('product_video_webm');
-
-        $ogv = $this->input->post('product_video_ogv');
-
-        if ($mp4 != '') {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "video" => $mp4,
-
-                "type" => 'mp4'
-
-                );
-
-            $ex_upd = $this->Model_crud->insert('product_video', $data_insert);
-
-        }
-
-        if ($webm != '') {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "video" => $webm,
-
-                "type" => 'webm'
-
-                );
-
-            $ex_upd = $this->Model_crud->insert('product_video', $data_insert);
-
-        }
-
-        if ($ogv != '') {
-
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "video" => $ogv,
-
-                "type" => 'ogv'
-
-                );
-
-            $ex_upd = $this->Model_crud->insert('product_video', $data_insert);
-
-        }
-
-        //Update Data Product Option
-        
-        //Update Data Product Special
-
-        //Delete old data first
-
-        $product_special_id = $this->input->post('product_special_id');
-
-        $product_special_price = $this->input->post('product_special_price');
-
-        $product_special_date_start = $this->input->post('product_special_date_start');
-
-        $product_special_date_end = $this->input->post('product_special_date_end');
-
-        if (empty($product_special_id)) {
-            $data_insert = array(
-
-                "product_id" => $product_id,
-
-                "price" => $product_special_price,
-
-                "date_start" => $product_special_date_start,
-
-                "date_end" => $product_special_date_end
-
-                );
-
-            $is_duplicate = $this->Model_crud->check_duplicate('product_special',['product_id'=>$product_id]);
-
-
-            if(!$is_duplicate){
-                $ex_upd = $this->Model_crud->insert('product_special', $data_insert);
-
-            }  
-
-        } else {
+            }
 
 
 
             $data_update = array(
 
-                "product_id" => $product_id,
+                "name" => $name,
 
-                "price" => $product_special_price,
+                "description" => $description,
 
-                "date_start" => $product_special_date_start,
+                "image" => $image,
 
-                "date_end" => $product_special_date_end
+                "type" => $type,
 
-            );
+                "item_id" => $item_id,
 
-            $ex_upd = $this->Model_crud->update('product_special', $data_update,array('product_special_id' => $product_special_id));
+                "content" => $content,
 
+                "weight" => $weight,
+
+                "size" => $size,
+
+                "shape" => $shape,
+
+                "clarity" => $clarity,
+
+                "treatment" => $treatment,
+
+                "origin" => $origin,
+
+                "price" => $price,
+
+                "quantity" => $quantity,
+
+                "stock" => $stock,
+
+                "category_id" => $category_id,
+
+                "featured" => $featured,
+
+                "sort_order" => $sort_order,
+
+                "status" => $status,
+
+                "slug" => $slug,
+
+                "date_modified" => date("c"),
+
+                'option_id' => $option_id
+
+                );
+
+
+
+            //Update Data Product
+
+            $ex_upd = $this->Model_crud->update('product', $data_update, array("product_id" => $product_id));
+
+
+
+            //Update Data Product Image
+
+            //Delete old data first
+
+            $ex_upd = $this->Model_crud->delete('product_image', array("product_id" => $product_id));
+
+            $product_image = $this->input->post('product_image');
+
+            $product_image_sort_order = $this->input->post('product_image_sort_order');
+
+            for ($i = 0; $i < count($product_image); $i++) {
+
+                $data_insert = array(
+
+                    "product_id" => $product_id,
+
+                    "image" => $product_image[$i],
+
+                    "sort_order" => $product_image_sort_order[$i]
+
+                    );
+
+                $ex_upd = $this->Model_crud->insert('product_image', $data_insert);
+
+            }
+
+
+
+            //Update Data Product Video
+
+            //Delete old data first
+
+            $ex_upd = $this->Model_crud->delete('product_video', array("product_id" => $product_id));
+
+            $mp4 = $this->input->post('product_video_mp4');
+
+            $webm = $this->input->post('product_video_webm');
+
+            $ogv = $this->input->post('product_video_ogv');
+
+            if ($mp4 != '') {
+
+                $data_insert = array(
+
+                    "product_id" => $product_id,
+
+                    "video" => $mp4,
+
+                    "type" => 'mp4'
+
+                    );
+
+                $ex_upd = $this->Model_crud->insert('product_video', $data_insert);
+
+            }
+
+            if ($webm != '') {
+
+                $data_insert = array(
+
+                    "product_id" => $product_id,
+
+                    "video" => $webm,
+
+                    "type" => 'webm'
+
+                    );
+
+                $ex_upd = $this->Model_crud->insert('product_video', $data_insert);
+
+            }
+
+            if ($ogv != '') {
+
+                $data_insert = array(
+
+                    "product_id" => $product_id,
+
+                    "video" => $ogv,
+
+                    "type" => 'ogv'
+
+                    );
+
+                $ex_upd = $this->Model_crud->insert('product_video', $data_insert);
+
+            }
+
+            //Update Data Product Option
+            
+            //Update Data Product Special
+
+            //Delete old data first
+
+            $product_special_id = $this->input->post('product_special_id');
+
+            $product_special_price = $this->input->post('product_special_price');
+
+            $product_special_date_start = $this->input->post('product_special_date_start');
+
+            $product_special_date_end = $this->input->post('product_special_date_end');
+
+            if (empty($product_special_id)) {
+                $data_insert = array(
+
+                    "product_id" => $product_id,
+
+                    "price" => $product_special_price,
+
+                    "date_start" => $product_special_date_start,
+
+                    "date_end" => $product_special_date_end
+
+                    );
+
+                $is_duplicate = $this->Model_crud->check_duplicate('product_special',['product_id'=>$product_id]);
+
+
+                if(!$is_duplicate){
+                    $ex_upd = $this->Model_crud->insert('product_special', $data_insert);
+
+                }  
+
+            } else {
+
+
+
+                $data_update = array(
+
+                    "product_id" => $product_id,
+
+                    "price" => $product_special_price,
+
+                    "date_start" => $product_special_date_start,
+
+                    "date_end" => $product_special_date_end
+
+                );
+
+                $ex_upd = $this->Model_crud->update('product_special', $data_update,array('product_special_id' => $product_special_id));
+
+            }
+
+
+
+
+            //notification
+
+            if ($ex_upd) {
+
+                $this->session->set_userdata('product_success', TRUE);
+
+            } else {
+
+                $this->session->set_userdata('product_error', TRUE);
+
+            }
+
+
+
+            redirect('admin/catalog/product');
         }
-
-
-
-
-        //notification
-
-        if ($ex_upd) {
-
-            $this->session->set_userdata('product_success', TRUE);
-
-        } else {
-
-            $this->session->set_userdata('product_error', TRUE);
-
-        }
-
-
-
-        redirect('admin/catalog/product');
 
     }
 

@@ -22,8 +22,24 @@ class Contact extends CI_Controller {
 
         $this->load->model('Model_front');
 
-        //Data
+        $this->load->library('email');
 
+        $this->load->helper('url');
+
+        //config
+        
+        $config['protocol'] = 'smtp';
+        $config['smtp_host'] = 'mail.app-show.net';
+        $config['smtp_port'] = '465';
+        $config['smtp_user'] = "herman@app-show.net";
+        $config['smtp_pass'] = "D9w3iuKa02";
+        $config['smtp_crypto'] ="ssl";
+        $config['charset'] = 'utf-8';
+        $config['wordwrap'] = TRUE;
+        $config['mailtype'] = 'html';
+        $this->email->initialize($config);
+
+        //Data
         $this->data = array(
 
             'title' => 'Contact'
@@ -359,10 +375,19 @@ class Contact extends CI_Controller {
         $headers .= 'From: Joscelynopal <store@joscelynopal.com>' . "\r\n";
 
 
+        $this->email->from('store@joscelynopal.com', 'Joscelynopal');
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+    
 
-        // Mail it
+        if(!$this->email->send()){
+            echo "GAGAL";
+        }
 
-        mail($to, $subject, $message, $headers);
+        exit;
+        
+      
 
     }
 

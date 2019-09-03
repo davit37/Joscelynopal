@@ -197,15 +197,8 @@ class Search extends CI_Controller {
 
         
 
-        //Data Product
-
-        $query = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1 AND p.name LIKE '%".$filter."%' ESCAPE '!'";
-
-
-        
-        $data['products'] = $this->Model_crud->select_query($query);
-
-        
+      $query = "SELECT p.*, ps.price as special, ps.date_end FROM product p LEFT JOIN product_special ps ON p.product_id = ps.product_id WHERE p.status = 1 AND p.name LIKE '%".$filter."%' ESCAPE '!'";
+      $data['products'] = $this->Model_crud->select_query($query);
 
         //Data Product Category
 

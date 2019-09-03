@@ -12,6 +12,63 @@
             <h1>Checkout</h1>
             <div id="accordion" class="panel-group">
                 <form enctype="multipart/form-data" method="post" action="<?php echo base_url('checkout/process/save') ?>">
+                  
+                    <?php if( asso_count($products['data_single'], 'sales_status', 'sold_out') >= count($products['data_single']) ){?>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Item Sold Out <i class="fa fa-caret-down"></i></a></h4>
+                        </div>
+                        
+                        <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                <div  class="items-message col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    
+                                    <div class="alert alert-warning">This Items have been bougth by another user
+                                    <button type="button" class="close" data-dismiss="alert">×</button></div>
+                                
+                                </div>
+                                <div class="panel-body">
+
+                                        <div class="wrap cf">
+                                        <div class="cart">
+                                            <ul class="cartWrap">
+                                                <?php foreach ($products['data_single'] as $key => $value) { 
+
+                                                    if($value['sales_status']=="sold_out"){?>
+
+                                                        <li class="items">
+
+                                                            <div class="infoWrap"> 
+                                                                <div class="cartSection">
+                                                                    <div class="cartDesc">
+                                                                        <img src="<?= base_url('upload').'/'.$value['image'];?>" alt="<?= $value['name'];?>" class="itemImg" />
+                                                                    </div>  
+                                                                    
+                                                                    <div class="cartDesc mainCartDesc">
+                                                                            <h3><?= $value['name'];?></h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div> 
+
+                                                        </li>                                                 
+                                                
+                                                
+                                                <?php } }?>
+                                            </ul>
+
+                                            <div class="cart-button cart-button-product-single">
+                                                <a href='<?= site_url('/home')?>' id="button-cart">Continue Shopping</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                        
+                        </div>
+                    </div>
+                    
+                    <?php } else{ ?>
+
                     <!-- Customer Detail Start -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -248,218 +305,218 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                    </div>
                             <!-- Payment Method End -->
-                            <?php if( asso_count($products['data_single'], 'sales_status', 'sold_out') > 0){?>
+                    <?php if( asso_count($products['data_single'], 'sales_status', 'sold_out') > 0){?>
 
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Item Sold Out <i class="fa fa-caret-down"></i></a></h4>
-                                </div>
-                              
-                                <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
-                                        <div  class="items-message col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                            
-                                            <div class="alert alert-warning">This Items have been bougth by another user
-                                            <button type="button" class="close" data-dismiss="alert">×</button></div>
-                                        
-                                        </div>
-                                        <div class="panel-body">
-
-                                           
-
-                                             <div class="wrap cf">
-                                                <div class="cart">
-                                                    <ul class="cartWrap">
-                                                        <?php foreach ($products['data_single'] as $key => $value) { 
-
-                                                            if($value['sales_status']=="sold_out"){?>
-
-                                                                <li class="items">
-
-                                                                    <div class="infoWrap"> 
-                                                                        <div class="cartSection">
-                                                                            <div class="cartDesc">
-                                                                                <img src="<?= base_url('upload').'/'.$value['image'];?>" alt="<?= $value['name'];?>" class="itemImg" />
-                                                                            </div>  
-                                                                            
-                                                                            <div class="cartDesc mainCartDesc">
-                                                                                 <h3><?= $value['name'];?></h3>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div> 
-
-                                                                </li>                                                 
-                                                        
-                                                        
-                                                        <?php } }?>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        
-                                        </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Item Sold Out <i class="fa fa-caret-down"></i></a></h4>
+                        </div>
+                        
+                        <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                <div  class="items-message col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    
+                                    <div class="alert alert-warning">This Items have been bougth by another user
+                                    <button type="button" class="close" data-dismiss="alert">×</button></div>
                                 
                                 </div>
-                            </div>
-                            
-                            <?php } ?>
+                                <div class="panel-body">
 
-                            <!-- Confirm Order Start -->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Confirm Order <i class="fa fa-caret-down"></i></a></h4>
-                                </div>
-                                <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
-                                    <div class="panel-body">
+                                    
 
                                         <div class="wrap cf">
-                                          <div class="cart">
+                                        <div class="cart">
+                                            <ul class="cartWrap">
+                                                <?php foreach ($products['data_single'] as $key => $value) { 
 
-                                           <?php if(!empty($products['data_single'])){
+                                                    if($value['sales_status']=="sold_out"){?>
 
-                                            $total_single   = 0;
+                                                        <li class="items">
 
-                                            $total_opton    = 0;
-
-                                            $total          = 0;
-
-                                            $count_subtotal = 0;
-
-                                            $subtotal       = 0;
-
-                                            $subtotal_option = 0;
-                                        } ?>
-
-                                        <ul class="cartWrap">
-
-                                           <?php 
-
-                                           foreach($products['data_single'] as $index => $value){
-
-                                             if($value['sales_status'] ==='available') {
-
-                                                if (!empty($value['special'])) {
-
-                                                    $now = strtotime(date('Y-m-d'));
-
-                                                    $date_end = strtotime($value['date_end']);
-
-                                                    if ($date_end >= $now) {
-
-                                                        $price = $value['special'];
-
-                                                    } else {
-
-                                                        $price = $value['price'];
-
-                                                    }
-                                                } else {
-                                                        $price = $value['price'];
-                                                }
-
-                                         ?>
-
-                                         
-                                         <li class="items">
-
-                                            <div class="infoWrap"> 
-                                                <div class="cartSection">
-                                                    <div class="cartDesc">
-                                                        <img src="<?php echo base_url('upload').'/'.$value['image'];?>" alt="<?php echo $value['name'];?>" class="itemImg" />
-                                                    </div>
-                                                    <div class="cartDesc mainCartDesc">
-                                                        <h3><?php echo $value['name'];?></h3>
-                                                        <p>Category : </p>
-                                                        <p><?php echo $value['category_name'];?></p>
-                                                        <div class="cartOpt">
-                                                            <?php
-
-                                                            echo '<div class="optItems">';
-                                                            echo '<p>Price : <strong>$'.number_format($price, 2, '.', '').'</strong></p>';
-                                                            echo '</div>';
-
-                                                            if(!empty($cart[$index]['option'])){?>
-
-                                                                <div class="optItems">
-                                        
-                                                                    <p>Option : <?php echo implode('|',$cart[$index]['option'])?> = <strong>$<?php echo number_format($cart[$index]['option_cost'],2, '.','')?></strong></p>
+                                                            <div class="infoWrap"> 
+                                                                <div class="cartSection">
+                                                                    <div class="cartDesc">
+                                                                        <img src="<?= base_url('upload').'/'.$value['image'];?>" alt="<?= $value['name'];?>" class="itemImg" />
+                                                                    </div>  
+                                                                    
+                                                                    <div class="cartDesc mainCartDesc">
+                                                                            <h3><?= $value['name'];?></h3>
+                                                                    </div>
                                                                 </div>
-                                        
-                                        
-                                                            <?php }
+                                                            </div> 
+
+                                                        </li>                                                 
                                                 
-                                                            ?>
-                                                        </div>
-                                                    </div>
-                                                </div>  
-                                                <?php 
-                                                $subtotal = 0;
+                                                
+                                                <?php } }?>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                        
+                        </div>
+                    </div>
+                    
+                    <?php } ?>
 
-                                                if(!empty($cart[$index]['option_cost'])){
-            
-                                                    $subtotal = $price + (float)$cart[$index]['option_cost'];
-                                        
-                                                } else {
+                    <!-- Confirm Order Start -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title"><a class="accordion-toggle" data-parent="#accordion" data-toggle="collapse" href="#collapse-checkout-confirm" aria-expanded="true">Confirm Order <i class="fa fa-caret-down"></i></a></h4>
+                        </div>
+                        <div id="collapse-checkout-confirm" class="panel-collapse collapse in" aria-expanded="true" style="">
+                            <div class="panel-body">
 
-                                                    $subtotal = $price;
+                                <div class="wrap cf">
+                                    <div class="cart">
 
-                                                }
+                                    <?php if(!empty($products['data_single'])){
 
-                                                echo '<div class="wrapper-cart-price">';
-                                                echo '<div class="prodTotal cartSection process subtotalpriceitems">';
-                                                echo '<p>$'.number_format($subtotal, 2, '.', '').'</p>';
-                                                echo '</div>';
-                                                echo '</div>';
-                                                $total+=$subtotal;
+                                    $total_single   = 0;
 
-                                                ?> 
+                                    $total_opton    = 0;
+
+                                    $total          = 0;
+
+                                    $count_subtotal = 0;
+
+                                    $subtotal       = 0;
+
+                                    $subtotal_option = 0;
+                                } ?>
+
+                                <ul class="cartWrap">
+
+                                    <?php 
+
+                                    foreach($products['data_single'] as $index => $value){
+
+                                        if($value['sales_status'] ==='available') {
+
+                                        if (!empty($value['special'])) {
+
+                                            $now = strtotime(date('Y-m-d'));
+
+                                            $date_end = strtotime($value['date_end']);
+
+                                            if ($date_end >= $now) {
+
+                                                $price = $value['special'];
+
+                                            } else {
+
+                                                $price = $value['price'];
+
+                                            }
+                                        } else {
+                                                $price = $value['price'];
+                                        }
+
+                                    ?>
+
+                                    
+                                    <li class="items">
+
+                                    <div class="infoWrap"> 
+                                        <div class="cartSection">
+                                            <div class="cartDesc">
+                                                <img src="<?php echo base_url('upload').'/'.$value['image'];?>" alt="<?php echo $value['name'];?>" class="itemImg" />
                                             </div>
-                                        </li>
-                                        <?php } ?>
-                                        <?php } 
-                                        //STOP LOOP
-                                        echo '<li class="items shipping-items">';
-                                        if(!empty($shipping_sess)){
-                                            $total = $total + $shipping_sess[0]['shipping_price'];
+                                            <div class="cartDesc mainCartDesc">
+                                                <h3><?php echo $value['name'];?></h3>
+                                                <p>Category : </p>
+                                                <p><?php echo $value['category_name'];?></p>
+                                                <div class="cartOpt">
+                                                    <?php
 
-                                            echo '<div class="infoWrap">'; 
-                                            echo '<div class="cartSection">';
-                                            echo '<div class="cartDesc shipDesc">';
-                                            echo '<p><strong>Shipping payment to : '.$shipping_sess[0]['name'].'</strong></p>';
-                                            echo '</div>';
+                                                    echo '<div class="optItems">';
+                                                    echo '<p>Price : <strong>$'.number_format($price, 2, '.', '').'</strong></p>';
+                                                    echo '</div>';
 
-                                            echo '<div class="wrapper-cart-price process">';
-                                            echo '<div class="prodTotal cartSection process">';
-                                            echo '<p>$'.number_format($shipping_sess[0]['shipping_price'], 2, '.', '').'</p>';
-                                            echo '</div>';
-                                            echo '</div>';
+                                                    if(!empty($cart[$index]['option'])){?>
 
-                                            echo '</div>';
+                                                        <div class="optItems">
+                                
+                                                            <p>Option : <?php echo implode('|',$cart[$index]['option'])?> = <strong>$<?php echo number_format($cart[$index]['option_cost'],2, '.','')?></strong></p>
+                                                        </div>
+                                
+                                
+                                                    <?php }
+                                        
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <?php 
+                                        $subtotal = 0;
 
-                                            echo '</div>';
+                                        if(!empty($cart[$index]['option_cost'])){
+    
+                                            $subtotal = $price + (float)$cart[$index]['option_cost'];
+                                
+                                        } else {
+
+                                            $subtotal = $price;
 
                                         }
-                                        echo '</li>';
 
-                                        ?>
+                                        echo '<div class="wrapper-cart-price">';
+                                        echo '<div class="prodTotal cartSection process subtotalpriceitems">';
+                                        echo '<p>$'.number_format($subtotal, 2, '.', '').'</p>';
+                                        echo '</div>';
+                                        echo '</div>';
+                                        $total+=$subtotal;
 
-                                </ul>
-                            </div>
+                                        ?> 
+                                    </div>
+                                </li>
+                                <?php } ?>
+                                <?php } 
+                                //STOP LOOP
+                                echo '<li class="items shipping-items">';
+                                if(!empty($shipping_sess)){
+                                    $total = $total + $shipping_sess[0]['shipping_price'];
 
-                            <div class="subtotal cf">
-                                <ul>
-                                  <li class="totalRow final amounttotal"><span class="label">Total</span><span class="value">$<?php echo number_format($total, 2, '.', '');?></span></li>
-                              </ul>
-                          </div>
+                                    echo '<div class="infoWrap">'; 
+                                    echo '<div class="cartSection">';
+                                    echo '<div class="cartDesc shipDesc">';
+                                    echo '<p><strong>Shipping payment to : '.$shipping_sess[0]['name'].'</strong></p>';
+                                    echo '</div>';
 
-                          <div class="buttons process-privacy">
-                            <div class="pull-right">
-                                <p>I have read and agree to the</p><p><a class="agree" data-toggle="modal" data-target="#myModal"><b>Privacy Policy</b></a><input type="checkbox" value="1" name="agree"></p>
-                                <input type="submit" name="submit" class="btn btn-primary" id="button-confirm" value="Confirm Order">
-                            </div>
+                                    echo '<div class="wrapper-cart-price process">';
+                                    echo '<div class="prodTotal cartSection process">';
+                                    echo '<p>$'.number_format($shipping_sess[0]['shipping_price'], 2, '.', '').'</p>';
+                                    echo '</div>';
+                                    echo '</div>';
+
+                                    echo '</div>';
+
+                                    echo '</div>';
+
+                                }
+                                echo '</li>';
+
+                                ?>
+
+                        </ul>
+                    </div>
+
+                        <div class="subtotal cf">
+                            <ul>
+                                <li class="totalRow final amounttotal"><span class="label">Total</span><span class="value">$<?php echo number_format($total, 2, '.', '');?></span></li>
+                            </ul>
                         </div>
 
+                        <div class="buttons process-privacy">
+                        <div class="pull-right">
+                            <p>I have read and agree to the</p><p><a class="agree" data-toggle="modal" data-target="#myModal"><b>Privacy Policy</b></a><input type="checkbox" value="1" name="agree"></p>
+                            <input type="submit" name="submit" class="btn btn-primary" id="button-confirm" value="Confirm Order">
+                        </div>
                     </div>
+
+                </div>
 
                     <!-- <?php if(!empty($products['data_single'])){
 
@@ -612,7 +669,8 @@
                 </div>
             </div>
         </div>
-        <!-- Confirm Order End -->
+        <?php } ?>
+    <!-- Confirm Order End -->
     </form>
 </div>
 </div>

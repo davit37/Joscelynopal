@@ -22,7 +22,11 @@
                 <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 list-product-wrap">
                     <div class="product-item-wrap">
                         <div class="product-image" style="background-image: url(<?php echo base_url('upload/' . $product['image']); ?>);"></div>
+<<<<<<< HEAD
                         <div class="product-title text-center"><a href="<?php echo base_url('product/'.$this->uri->segment(2).'/'.$product['slug']); ?>"><?php echo word_limiter(strip_tags($product['name']), 3) ?></a></div>
+=======
+                        <div class="product-title text-center"><a href="<?php echo base_url('shop/'.$this->uri->segment(2).'/'.$product['slug']); ?>"><?php echo word_limiter(strip_tags($product['name']), 3) ?></a></div>
+>>>>>>> 0743e45aaaff2c8e54be0f3007185b94d85e54d4
                         <div class="item-desc text-center"><?php echo word_limiter(strip_tags($product['description']), 8); ?></div>
                         <div class="item-price text-center"><?php echo ($flag_special) ? 'has-special' : ''; ?> $<?php echo number_format($product['price'], 2, '.', '') ?></div>
                         <?php if ($flag_special) { ?>
@@ -31,7 +35,11 @@
                                 $save = ($product['price'] - $product['special']) / $product['price'] * 100;
                                 echo number_format($save, 0, '.', '');
                                 ?>%
+<<<<<<< HEAD
                         </div>  
+=======
+                        </div>
+>>>>>>> 0743e45aaaff2c8e54be0f3007185b94d85e54d4
                         <div id="popup-product-<?php echo $i ?>" class="offer text-center"><a href="#popup<?php echo $i ?>">Special Offer!</a></div>
                         <?php } ?>
                     </div>
