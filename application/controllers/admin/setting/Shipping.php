@@ -148,10 +148,7 @@ class Shipping extends CI_Controller {
             $id    = $this->input->post('id');
             $price = $this->input->post('price');
 
-            echo '<pre>';
-            print_r($_POST);
-            echo '</pre>';
-            exit;
+           
 
             foreach($id as $index => $value){
                 if(empty($price[$index])){

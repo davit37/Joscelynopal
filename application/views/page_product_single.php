@@ -267,29 +267,7 @@
 
 
                     <?php
-                    /*if ($product_review) {
-                        foreach ($product_review as $review) {
-                            ?>
-                            <div class="review-content-wrap">
-                                <div>
-                                    <?php
-                                    for ($i = 0; $i < $review['rating']; $i++) {
-                                        echo '<img src="' . base_url("assets/images/icon/rating-active.png") . '">';
-                                    }
-                                    for ($i = 0; $i < 5 - $review['rating']; $i++) {
-                                        echo '<img src="' . base_url("assets/images/icon/rating.png") . '">';
-                                    }
-                                    ?>
-                                </div>
-                                <div class="review-title"><?php echo $review['title'] ?></div>
-                                <div class="review-body"><?php echo $review['text'] ?></div>
-                                <div class="review-date"><?php echo date("F d, Y", strtotime($review['date_added'])) ?></div>
-                            </div>
-                        <?php
-                        }
-                    } else {
-                        echo '<div class="review-content-wrap"><div class="review-title">No Review</div></div>';
-                    }*/
+      
 
                     if ($review) {
                         foreach ($review as $reviews) {
@@ -312,6 +290,7 @@
                         <?php
                         }
                     } else {
+                        
                         echo '<div class="review-content-wrap"><div class="review-title">No Review</div></div>';
                     }
                     ?>
@@ -343,48 +322,7 @@
 
 </div>
 
-<!-- <div class="modal fade" id="modalReview">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Write Review</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="email" class="control-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email">
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="control-label">Rating:</label>
-                        <select class="form-control" id="rating" name="rating">
-                            <option value="1">Very Bad</option>
-                            <option value="2">Bad</option>
-                            <option value="3">Neural</option>
-                            <option value="4">Good</option>
-                            <option value="5">Very Good</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="title" class="control-label">Title:</label>
-                        <input type="text" class="form-control" id="title" name="title">
-                    </div>
-                    <div class="form-group">
-                        <label for="message-text" class="control-label">Message:</label>
-                        <textarea class="form-control" id="message" name="message"></textarea>
-                    </div>
-                    <input type="hidden" id="product_id" name="product_id" value="<?php echo $product[0]['product_id'] ?>">
-                    <input type="hidden" id="customer_id" name="customer_id" value="<?php echo ($this->session->userdata('uid')) ? $this->session->userdata('uid') : 0; ?>">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="send">Send</button>
-            </div>
-        </div>
-    </div>
-</div> -->
+
 
 <script type="text/javascript">
 
@@ -529,7 +467,14 @@
                         $('html, body').animate({scrollTop: 0}, 'slow');
                     }
                 }
-            });
+            }).fail(function(res){
+
+                $('#message').empty();
+                $(".overlay").css("visibility", "hidden");
+                $('#message').append('<div class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You have already added this product to your cart<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('html, body').animate({scrollTop: 0}, 'slow');
+
+            })
         });
 
         $("#qty").keydown(function(e) {

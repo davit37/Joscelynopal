@@ -92,9 +92,9 @@
 
                                                         ($this->session->userdata('value_shipping_country_id') == $country['country_id']) ? $selected = 'selected': $selected = '';
 
-                                                        if ($country['shipping_price'] != NULL) {
+                                                        // if ($country['shipping_price'] != NULL) {
                                                             echo "<option ".$selected." data-name=".$country['name']." data-price=".number_format($country['shipping_price'], 2, '.', '')." value='" . $country['country_id'] . "'>" . $country['name'] . " - $". number_format($country['shipping_price'], 2, '.', '') ."</option>";
-                                                        }
+                                                        // }
                                                     }
                                                     ?>
                                                 </select>

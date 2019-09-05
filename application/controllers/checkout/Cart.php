@@ -587,6 +587,7 @@ public function add($seg1 = '', $option_id = '', $seg3 = '') {
 
 
 
+
             if(!empty($option)){
 
 
@@ -654,6 +655,10 @@ public function add($seg1 = '', $option_id = '', $seg3 = '') {
         foreach ($json as $row) {
 
             if ($row['product_id'] == $product_id) {
+
+                http_response_code(406);
+
+                exit;
 
                 $flag = TRUE;
 

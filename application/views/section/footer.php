@@ -42,7 +42,14 @@
                     $('#menu-cart').append('<i class="fa fa-shopping-cart"></i> Cart (' + json.length + ')</a>');
                     $('html, body').animate({scrollTop: 0}, 'slow');
                 }
-            });
+            }).fail(function(res){
+
+                    $('#message').empty();
+                    $(".overlay").css("visibility", "hidden");
+                    $('#message').append('<div class="alert alert-warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You have already added this product to your cart<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    $('html, body').animate({scrollTop: 0}, 'slow');
+
+                });
         },
         'remove': function(key) {
             $.ajax({
